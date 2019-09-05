@@ -6,18 +6,58 @@
     </head>
    
     <body>
-        Here is the output of the PHP script : 
+        Here is the output of the PHP script :<br>
         <?php
-          // This is a one line PHP comment
-          /* This other way to write comments can 
-          go on many lines */
-           
-          // Let's assign the string "hello" to the variable 'texte'
-          // Variable names start with $ in PHP
-          $texte = "hello world !";
+          
+        $voiture['marque'] = "Audi";
+        $voiture['couleur'] = "rouge";
+        $voiture['immatriculation'] = "679-DB-13";
 
-          // Let's write the value of variable '$texte'
-          echo $texte;
+        /*
+        ou
+          $voiture = array(
+          'marque' => 'Audi',
+          'couleur' => 'rouge',
+          'immatriculation' => "679-DB-13");
+
+        */
+
+        echo "<p>voiture " . $voiture['immatriculation'] . " de marque " . $voiture['marque'] . " (couleur " . $voiture['couleur'] . ")</p>";
+
+
+        $voiture1 = array(
+          'marque' => 'Fiat',
+          'couleur' => 'jaunepoussin',
+          'immatriculation' => 'BONOBO-30');
+
+         $voiture2 = array(
+          'marque' => 'Lambo',
+          'couleur' => 'Blanc-Bleu',
+          'immatriculation' => 'TracteurTom');
+
+        $voitures = array(
+          1       => $voiture,
+          2       => $voiture1,
+          3       => $voiture2);
+        
+        //var_dump($voitures);
+
+
+        if(empty($voitures)){
+          echo "<p>il n'y a aucune voitures</p>";
+        }else{
+          echo "<h2>Liste des voitures :</h2>\n <ul>";
+          foreach ($voitures as $key => $voiture) {
+            echo "<li>voiture " . $voiture['immatriculation'] . " de marque " . $voiture['marque'] . " (couleur " . $voiture['couleur'] . ")</li>";
+          }
+          echo "</ul>";
+
+
+        }
+
         ?>
+
+
+
     </body>
 </html> 
