@@ -16,7 +16,7 @@
 		}
 
 		//setter générique
-		public function get($nom_attribut,$value){
+		public function set($nom_attribut,$value){
 			$this->$nom_attribut = $value;
 		}
 
@@ -31,6 +31,11 @@
 				$this->$prix = $data['$prix'];
 				$this->$conducteur_login = $data['$conducteur_login'];
 			}
+		}
+
+
+		public function afficher(){
+			echo "id: " . $this->id . " depart: " . $this->depart . " arrivee: " . $this->arrivee . " date: " . $this->date . " nbplaces: " . $this->nbplaces . " prix: " . $this->prix . " conducteur_login: " . $this->conducteur_login;
 		}
 
 		public static function getAllTrajets(){

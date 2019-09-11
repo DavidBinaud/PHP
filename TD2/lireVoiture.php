@@ -32,4 +32,5 @@
 		echo "<p>" . $voiture->afficher() . "</p>";
 	}
 
+
 ?>
