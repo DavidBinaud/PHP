@@ -8,7 +8,7 @@
    
     <body>
         <?php
-        	require_once("./voiture.php");
+        	require_once("./Voiture.php");
 
 
         	$voiture1 = new Voiture("Audi","Rouge","679-DB-84");
