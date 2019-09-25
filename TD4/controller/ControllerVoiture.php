@@ -25,8 +25,13 @@
 
 		public static function created(){
 			$v = new ModelVoiture($_GET['marque'],$_GET['couleur'],$_GET['immatriculation']);
-			ModelVoiture::save($v);
-			ControllerVoiture::readAll();
+			
+			if(ModelVoiture::save($v) == false){
+				require ('../view/voiture/errorCreate.php');  //redirige vers la vue d'erreur
+			}else{
+				self::readAll();
+			}
+			
 		}
 	}
 ?>

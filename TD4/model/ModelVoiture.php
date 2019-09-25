@@ -100,7 +100,13 @@ class ModelVoiture {
         "couleur" => $voiture->couleur
     );
     
-    $req_prep->execute($values);
+    try{
+      $req_prep->execute($values);
+    } catch(PDOException $e) {
+          if($e->getCode() == 1062);{
+            return false;
+          }
+      }
 
   }
 
