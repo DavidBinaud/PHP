@@ -33,5 +33,10 @@
 			}
 			
 		}
+
+
+		public static function delete(){
+			
+		}
 	}
 ?>
