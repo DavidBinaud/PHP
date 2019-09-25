@@ -60,6 +60,27 @@
         return  $rep->fetchAll();
     }
 
+    public static function findTrajets($login){
+      $sql = "SELECT T.*
+              FROM trajet T
+              JOIN passager P ON T.id=P.trajet_id
+              WHERE P.utilisateur_login=:login";
+
+      $req_prep = Model::$pdo->prepare($sql);
+
+        $values = array(
+            "login" => $login
+        );
+    
+        $req_prep->execute($values);
+
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Trajet');
+
+        return $req_prep->fetchAll();
+
+
+    }
+
 
   }
 ?>
