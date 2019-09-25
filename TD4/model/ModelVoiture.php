@@ -103,11 +103,11 @@ class ModelVoiture {
     try{
       $req_prep->execute($values);
     } catch(PDOException $e) {
-          if($e->getCode() == 1062);{
+          if($e->getCode() == 23000){
             return false;
           }
       }
-
+      return true;
   }
 
 
