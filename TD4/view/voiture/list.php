@@ -8,7 +8,7 @@
         <?php
 
         foreach ($tab_v as $v){
-            echo '<p> Voiture d\'immatriculation ' . "<a href=\"http://webinfo/~binaudd/PHP/TD4/controller/routeur.php?action=read&immatriculation=" . $v->getImmatriculation() . '">' . $v->getImmatriculation() ."</a> (" . "<a href=\"http://webinfo/~binaudd/PHP/TD4/controller/routeur.php?action=delete&immatriculation=" . $v->getImmatriculation() . '">' ."Supprimer)</p>" ;
+            echo '<p> Voiture d\'immatriculation ' . "<a href=\"routeur.php?action=read&immatriculation=" . $v->getImmatriculation() . '">' . $v->getImmatriculation() ."</a> (" . "<a href=\"routeur.php?action=delete&immatriculation=" . $v->getImmatriculation() . '">' ."Supprimer</a>)</p>" ;
         }
         ?>
     </body>

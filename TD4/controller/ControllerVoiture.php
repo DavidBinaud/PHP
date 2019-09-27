@@ -36,7 +36,8 @@
 
 
 		public static function delete(){
-			
+			ModelVoiture::delete($_GET['immatriculation']);
+			self::readAll();
 		}
 	}
 ?>
