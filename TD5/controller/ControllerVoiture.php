@@ -46,7 +46,9 @@
 				$controller='voiture'; $view='errorCreate'; $pagetitle='Erreur de Création';
 				require (File::build_path(array("view","view.php")));
 			}else{
-				self::readAll();
+				$tab_v = ModelVoiture::getAllVoitures();
+				$controller='voiture'; $view='created'; $pagetitle='Création Reussie';
+				require (File::build_path(array("view","view.php")));
 			}
 			
 		}
