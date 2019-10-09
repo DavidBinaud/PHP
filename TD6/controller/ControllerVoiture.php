@@ -58,5 +58,12 @@
 			ModelVoiture::delete($_GET['immatriculation']);
 			self::readAll();
 		}
+
+
+		public static function error(){
+			$controller='voiture'; $view='error'; $pagetitle='Erreur Nom d\'action';
+			require (File::build_path(array("view","view.php")));
+
+		}
 	}
 ?>

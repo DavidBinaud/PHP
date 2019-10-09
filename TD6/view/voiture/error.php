@@ -1,3 +1,3 @@
 <?php
-   echo "Immatriculation non reconnue" 
+   echo "Erreur" 
 ?>
