@@ -111,7 +111,7 @@
         return true;
     }
 
-    public static function delete($immat){
+    public static function deleteByImmat($immat){
           $sql = "DELETE FROM voiture WHERE immatriculation=:immatriculation";
 
       $req_prep = Model::$pdo->prepare($sql);

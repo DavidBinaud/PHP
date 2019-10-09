@@ -55,8 +55,12 @@
 
 
 		public static function delete(){
-			ModelVoiture::delete($_GET['immatriculation']);
-			self::readAll();
+			ModelVoiture::deleteByImmat($_GET['immatriculation']);
+			$tab_v = ModelVoiture::getAllVoitures();
+			$immat = $_GET['immatriculation'];
+
+			$controller='voiture'; $view='delete'; $pagetitle='Suppresion Voiture';
+			require (File::build_path(array("view","view.php")));
 		}
 
 
