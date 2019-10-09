@@ -69,6 +69,8 @@
     }
 
 
+
+
     public static function getVoitureByImmat($immat) {
       $sql = "SELECT * from voiture WHERE immatriculation=:nom_tag";
       // Préparation de la requête
@@ -89,6 +91,8 @@
           return false;
       return $tab_voit[0];
     }
+
+
 
     public static function save($voiture){
       $sql = "INSERT INTO voiture (immatriculation,marque,couleur) VALUES (:immatriculation,:marque,:couleur)";
@@ -111,6 +115,9 @@
         return true;
     }
 
+
+
+
     public static function deleteByImmat($immat){
           $sql = "DELETE FROM voiture WHERE immatriculation=:immatriculation";
 
@@ -129,6 +136,22 @@
         }
         return true;
         */
+    }
+
+
+
+
+    public static function update($data){
+       $sql = "UPDATE voiture SET marque=:marque,couleur=:couleur WHERE immatriculation=:immatriculation";
+
+        $req_prep = Model::$pdo->prepare($sql);
+      
+      //try{
+        $req_prep->execute($data);
+
+
+
+
     }
   }
 ?>

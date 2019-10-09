@@ -4,6 +4,8 @@
 	require_once (File::build_path(array("model","ModelVoiture.php"))); // chargement du modèle
 	Class ControllerVoiture{
 
+
+
 		public static function readAll(){
 			$tab_v = ModelVoiture::getAllVoitures();     //appel au modèle pour gerer la BD
 			//require ('../view/voiture/list.php');  //redirige vers la vue
@@ -11,6 +13,9 @@
 			$controller='voiture'; $view='list'; $pagetitle='Liste des voitures';
 			require (File::build_path(array("view","view.php")));
 		}
+
+
+
 
 		public static function read(){
 			$v = ModelVoiture::getVoitureByImmat($_GET['immatriculation']);     //appel au modèle pour gerer la BD
@@ -30,12 +35,18 @@
 
 
 
+
+
+
+
 		public static function create(){
 			//require ('../view/voiture/create.php');
 			//require (File::build_path(array("view","voiture","create.php")));
 			$controller='voiture'; $view='create'; $pagetitle='Creation Voiture';
 			require (File::build_path(array("view","view.php")));
 		}
+
+
 
 		public static function created(){
 			$v = new ModelVoiture($_GET['marque'],$_GET['couleur'],$_GET['immatriculation']);
@@ -54,6 +65,13 @@
 		}
 
 
+
+
+
+
+
+
+
 		public static function delete(){
 			ModelVoiture::deleteByImmat($_GET['immatriculation']);
 			$tab_v = ModelVoiture::getAllVoitures();
@@ -64,11 +82,23 @@
 		}
 
 
+
+
+
+
+
 		public static function error(){
 			$controller='voiture'; $view='error'; $pagetitle='Erreur Nom d\'action';
 			require (File::build_path(array("view","view.php")));
 
 		}
+
+
+
+
+
+
+
 
 
 
@@ -85,6 +115,28 @@
 					$controller='voiture'; $view='update'; $pagetitle='Mise A Jour';
 					require (File::build_path(array("view","view.php")));
 				}
+			}
+			else{
+				self::error();
+			}
+		}
+
+
+
+
+		public static function updated(){
+			if(isset($_GET['immatriculation']) && isset($_GET['marque']) && isset($_GET['couleur'])){
+				$data = array(
+					"immatriculation" => $_GET['immatriculation'],
+					"marque" => $_GET['marque'],
+					"couleur" => $_GET['couleur']
+				);
+
+				ModelVoiture::update($data);
+
+				$tab_v = ModelVoiture::getAllVoitures();
+				$controller='voiture'; $view='updated'; $pagetitle='Mise A Jour';
+				require (File::build_path(array("view","view.php")));
 			}
 			else{
 				self::error();
