@@ -11,7 +11,6 @@
 		$controller_class = 'Controller' . ucfirst($controller);
 
 
-
 		if(class_exists($controller_class)){
 			//on vérifie que la classe existe
 
