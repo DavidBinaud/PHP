@@ -1,6 +1,10 @@
 <?php
     $vImmatriculation = htmlspecialchars($v->getImmatriculation());
+    $vImmatriculationURL = rawurlencode($v->getImmatriculation());
     $vMarque = htmlspecialchars($v->getMarque());
     $vCouleur = htmlspecialchars($v->getCouleur());
-    echo "voiture " . $vImmatriculation . " de marque " . $vMarque . " (couleur " . $vCouleur . ")";
+    echo <<<EOT
+        	<p> Voiture d'immatriculation $vImmatriculation, de marque $vMarque et de couleur $vCouleur.
+        	(<a href=index.php?action=update&immatriculation=$vImmatriculationURL >Mettre A Jour</a>)</p>
+EOT;
 ?>

@@ -69,5 +69,27 @@
 			require (File::build_path(array("view","view.php")));
 
 		}
+
+
+
+		public static function update(){
+			if(isset($_GET['immatriculation'])){
+				$v = ModelVoiture::getVoitureByImmat($_GET['immatriculation']);
+
+				if($v == false){
+					//require ('../view/voiture/error.php');  //redirige vers la vue d'erreur
+					//require (File::build_path(array("view","voiture","error.php")));
+					self::error();
+				}
+				else{
+					$controller='voiture'; $view='update'; $pagetitle='Mise A Jour';
+					require (File::build_path(array("view","view.php")));
+				}
+			}
+			else{
+				self::error();
+			}
+		}
+		
 	}
 ?>
