@@ -26,6 +26,7 @@
 
 	    <p>
 	      <input type='hidden' name='action' value='updated'>
+	      <input type='hidden' name='controller' value='voiture'>
 	      <input type="submit" value="Envoyer" />
 	    </p>
 	  </fieldset> 
