@@ -8,7 +8,7 @@
 
     	<header>
     		<div class="nav">
-			  <a href="index.php?action=readAll">Gestion Voitures</a>
+			  <a href="index.php?action=readAll&controller=voiture">Gestion Voitures</a>
 			  <a href="index.php?action=readAll&controller=utilisateur">Gestion Utilisateurs</a>
 			  <a href="index.php?action=readAll&controller=trajet">Gestion Trajets</a>
 			</div>

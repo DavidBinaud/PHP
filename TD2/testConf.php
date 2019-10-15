@@ -14,7 +14,7 @@
 
 			  // On affiche le login de la base de donnees
 			  
-			  echo "<p>hostname: " . Conf::getHostname() . "<br>database: " . Conf::getDatabase() . "<br>login: " . Conf::getLogin() . "<br>password: " . Conf::getPassword() . "</p>";
+			  echo "<p>hostname: " . Conf::getHostname() . "<br>database: " . Conf::getDatabase() . "<br>login: " . Conf::getLogin() . "<br>password: FuckTroll" . "</p>";
 			?>
 
 		</body>

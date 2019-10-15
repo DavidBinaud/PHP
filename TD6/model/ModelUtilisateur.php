@@ -54,7 +54,7 @@
         $rep = Model::$pdo->query("SELECT * FROM utilisateur");
 
         #On précise le mode de récupération des données contenues dans la variable $rep, on les récupère en utilisant la classe Utilisateur qui va appeler son constructeur sur chaque "tuples" et créer un objet de la classe spécifiée pour chaque tuple
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'User');
+        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
 
         #on renvois le tableau d'objets utilisateur créés
         return  $rep->fetchAll();

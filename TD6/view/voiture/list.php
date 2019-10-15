@@ -8,4 +8,5 @@
         	(<a href=index.php?action=delete&controller=voiture&immatriculation=$vImmatriculationURL > Supprimer</a>)</p>
 EOT;
     }
+    echo "<p> <a href=\"index.php?action=create&controller=voiture\" >Créer une Voiture</a></p>";
 ?>
