@@ -57,7 +57,7 @@
 				$controller='voiture'; $view='errorCreate'; $pagetitle='Erreur de Création';
 				require (File::build_path(array("view","view.php")));
 			}else{
-				$tab_v = ModelVoiture::getAllVoitures();
+				$tab_v = ModelVoiture::selectAll();
 				$controller='voiture'; $view='created'; $pagetitle='Création Reussie';
 				require (File::build_path(array("view","view.php")));
 			}
@@ -74,7 +74,7 @@
 
 		public static function delete(){
 			ModelVoiture::deleteByImmat($_GET['immatriculation']);
-			$tab_v = ModelVoiture::getAllVoitures();
+			$tab_v = ModelVoiture::selectAll();
 			$immat = $_GET['immatriculation'];
 
 			$controller='voiture'; $view='delete'; $pagetitle='Suppresion Voiture';
