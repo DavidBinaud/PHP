@@ -18,7 +18,7 @@
 
 
 		public static function read(){
-			$v = ModelVoiture::getVoitureByImmat($_GET['immatriculation']);     //appel au modèle pour gerer la BD
+			$v = ModelVoiture::select($_GET['immatriculation']);     //appel au modèle pour gerer la BD
 			if($v == false){
 				//require ('../view/voiture/error.php');  //redirige vers la vue d'erreur
 				//require (File::build_path(array("view","voiture","error.php")));

@@ -6,7 +6,8 @@
     private $login;
     private $nom;
     private $prenom;
-    protected static $object = "utilisateur"; 
+    protected static $object = "utilisateur";
+    protected static $primary='login';
 
 
     //getter générique
@@ -31,17 +32,7 @@
       echo "login: " . $this->login . " nom: " . $this->nom . " prenom: " . $this->prenom;
     }
 
-    public static function getAllUtilisateurs(){
-        #query est le mot clé pour requete(FR) c'est une fonction de la classe pdo qui est l'attribut contenu dans NOTRE classe Model
-        # la variable rep se retrouve avec la réponse de la base de données mais non lisible en PHP
-        $rep = Model::$pdo->query("SELECT * FROM utilisateur");
 
-        #On précise le mode de récupération des données contenues dans la variable $rep, on les récupère en utilisant la classe Utilisateur qui va appeler son constructeur sur chaque "tuples" et créer un objet de la classe spécifiée pour chaque tuple
-        $rep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
-
-        #on renvois le tableau d'objets utilisateur créés
-        return  $rep->fetchAll();
-    }
 
     public static function findTrajets($login){
       $sql = "SELECT T.*

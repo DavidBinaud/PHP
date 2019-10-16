@@ -11,6 +11,7 @@
 		private $prix;
 		private $conducteur_login;
 		protected static $object = "trajet";
+		protected static $primary='id';
 
 		//getter générique
 		public function get($nom_attribut){
@@ -40,17 +41,6 @@
 			echo "id: " . $this->id . " depart: " . $this->depart . " arrivee: " . $this->arrivee . " date: " . $this->date . " nbplaces: " . $this->nbplaces . " prix: " . $this->prix . " conducteur_login: " . $this->conducteur_login;
 		}
 
-		public static function getAllTrajets(){
-			#query est le mot clé pour requete(FR) c'est une fonction de la classe pdo qui est l'attribut contenu dans NOTRE classe Model
-        	# la variable rep se retrouve avec la réponse de la base de données mais non lisible en PHP
-			$rep = Model::$pdo->query("SELECT * FROM trajet");
-
-			#On précise le mode de récupération des données contenues dans la variable $rep, on les récupère en utilisant la classe Utilisateur qui va appeler son constructeur sur chaque "tuples" et créer un objet de la classe spécifiée pour chaque tuple
-    		$rep->setFetchMode(PDO::FETCH_CLASS, 'ModelTrajet');
-
-    		#on renvois le tableau d'objets trajet créés
-    		return  $rep->fetchAll();
-		}
 
 
 		public static function findPassagers($id){

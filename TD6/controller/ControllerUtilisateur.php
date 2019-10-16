@@ -11,5 +11,22 @@
 			require (File::build_path(array("view","view.php")));
 		}
 
+
+		public static function read(){
+			$u = ModelUtilisateur::select($_GET['login']);     //appel au modèle pour gerer la BD
+			if($u == false){
+				//require ('../view/voiture/error.php');  //redirige vers la vue d'erreur
+				//require (File::build_path(array("view","voiture","error.php")));
+				$controller='utilisateur'; $view='error'; $pagetitle='ErreurUserByID';
+				require (File::build_path(array("view","view.php")));
+			}else
+			{
+				//require ('../view/voiture/detail.php');  //redirige vers la vue des détails de la voiture
+				//require (File::build_path(array("view","voiture","detail.php")));
+				$controller='utilisateur'; $view='detail'; $pagetitle='Detail utilisateur';
+				require (File::build_path(array("view","view.php")));
+			}
+		}
+
 	}
 ?>
