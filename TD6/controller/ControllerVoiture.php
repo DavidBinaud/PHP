@@ -3,6 +3,7 @@
 	//require_once ('../model/ModelVoiture.php'); // chargement du modèle
 	require_once (File::build_path(array("model","ModelVoiture.php"))); // chargement du modèle
 	Class ControllerVoiture{
+		protected static $object = 'voiture';
 
 
 
@@ -10,7 +11,7 @@
 			$tab_v = ModelVoiture::selectAll();     //appel au modèle pour gerer la BD
 			//require ('../view/voiture/list.php');  //redirige vers la vue
 			//require (File::build_path(array("view","voiture","list.php")));
-			$controller='voiture'; $view='list'; $pagetitle='Liste des voitures';
+			$view='list'; $pagetitle='Liste des voitures';
 			require (File::build_path(array("view","view.php")));
 		}
 
@@ -22,13 +23,13 @@
 			if($v == false){
 				//require ('../view/voiture/error.php');  //redirige vers la vue d'erreur
 				//require (File::build_path(array("view","voiture","error.php")));
-				$controller='voiture'; $view='error'; $pagetitle='ErreurVoitByImmat';
+				$view='error'; $pagetitle='ErreurVoitByImmat';
 				require (File::build_path(array("view","view.php")));
 			}else
 			{
 				//require ('../view/voiture/detail.php');  //redirige vers la vue des détails de la voiture
 				//require (File::build_path(array("view","voiture","detail.php")));
-				$controller='voiture'; $view='detail'; $pagetitle='Detail Voiture';
+				$view='detail'; $pagetitle='Detail Voiture';
 				require (File::build_path(array("view","view.php")));
 			}
 		}
@@ -42,7 +43,7 @@
 		public static function create(){
 			//require ('../view/voiture/create.php');
 			//require (File::build_path(array("view","voiture","create.php")));
-			$controller='voiture'; $view='create'; $pagetitle='Creation Voiture';
+			$view='create'; $pagetitle='Creation Voiture';
 			require (File::build_path(array("view","view.php")));
 		}
 
@@ -54,11 +55,11 @@
 			if(ModelVoiture::save($v) == false){
 				//require ('../view/voiture/errorCreate.php');  //redirige vers la vue d'erreur
 				//require (File::build_path(array("view","voiture","errorCreate.php")));
-				$controller='voiture'; $view='errorCreate'; $pagetitle='Erreur de Création';
+				$view='errorCreate'; $pagetitle='Erreur de Création';
 				require (File::build_path(array("view","view.php")));
 			}else{
 				$tab_v = ModelVoiture::selectAll();
-				$controller='voiture'; $view='created'; $pagetitle='Création Reussie';
+				$view='created'; $pagetitle='Création Reussie';
 				require (File::build_path(array("view","view.php")));
 			}
 			
@@ -77,7 +78,7 @@
 			$tab_v = ModelVoiture::selectAll();
 			$immat = $_GET['immatriculation'];
 
-			$controller='voiture'; $view='delete'; $pagetitle='Suppresion Voiture';
+			$view='delete'; $pagetitle='Suppresion Voiture';
 			require (File::build_path(array("view","view.php")));
 		}
 
@@ -88,7 +89,7 @@
 
 
 		public static function error(){
-			$controller='voiture'; $view='error'; $pagetitle='Erreur Nom d\'action';
+			$view='error'; $pagetitle='Erreur Nom d\'action';
 			require (File::build_path(array("view","view.php")));
 
 		}
@@ -112,7 +113,7 @@
 					self::error();
 				}
 				else{
-					$controller='voiture'; $view='update'; $pagetitle='Mise A Jour';
+					$view='update'; $pagetitle='Mise A Jour';
 					require (File::build_path(array("view","view.php")));
 				}
 			}
@@ -135,7 +136,7 @@
 				ModelVoiture::update($data);
 
 				$tab_v = ModelVoiture::getAllVoitures();
-				$controller='voiture'; $view='updated'; $pagetitle='Mise A Jour';
+				$view='updated'; $pagetitle='Mise A Jour';
 				require (File::build_path(array("view","view.php")));
 			}
 			else{
