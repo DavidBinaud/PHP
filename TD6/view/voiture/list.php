@@ -9,4 +9,7 @@
 EOT;
     }
     echo "<p> <a href=\"index.php?action=create&controller=voiture\" >Créer une Voiture</a></p>";
+
+	require (File::build_path(array("view",static::$object,"listTable.php")));
+
 ?>
