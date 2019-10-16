@@ -1,8 +1,8 @@
 <?php
 	
-    $vImmatriculation = htmlspecialchars($v->getImmatriculation());
-    $vMarque = htmlspecialchars($v->getMarque());
-    $vCouleur = htmlspecialchars($v->getCouleur());
+    $vImmatriculation = htmlspecialchars($v->get('immatriculation'));
+    $vMarque = htmlspecialchars($v->get('marque'));
+    $vCouleur = htmlspecialchars($v->get('couleur'));
 
     echo <<<EOT
 	<form method="get" action="index.php">

@@ -1,7 +1,7 @@
 <?php
-	require_once 'Model.php';
-	require_once 'User.php';
-	class Trajet {
+	require_once (File::build_path(array("model","Model.php")));
+	require_once (File::build_path(array("model","ModelUtilisateur.php")));
+	class ModelTrajet extends Model{
 
 		private $id;
 		private $depart;
@@ -10,6 +10,7 @@
 		private $nbplaces;
 		private $prix;
 		private $conducteur_login;
+		protected static $object = "trajet";
 
 		//getter générique
 		public function get($nom_attribut){
@@ -45,7 +46,7 @@
 			$rep = Model::$pdo->query("SELECT * FROM trajet");
 
 			#On précise le mode de récupération des données contenues dans la variable $rep, on les récupère en utilisant la classe Utilisateur qui va appeler son constructeur sur chaque "tuples" et créer un objet de la classe spécifiée pour chaque tuple
-    		$rep->setFetchMode(PDO::FETCH_CLASS, 'Trajet');
+    		$rep->setFetchMode(PDO::FETCH_CLASS, 'ModelTrajet');
 
     		#on renvois le tableau d'objets trajet créés
     		return  $rep->fetchAll();
@@ -68,7 +69,7 @@
     
     		$req_prep->execute($values);
 
-    		$req_prep->setFetchMode(PDO::FETCH_CLASS, 'User');
+    		$req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelUtilisateur');
 
     		#on renvois le tableau d'objets trajet créés
     		return  $req_prep->fetchAll();

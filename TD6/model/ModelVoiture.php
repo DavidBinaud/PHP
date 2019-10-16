@@ -1,32 +1,26 @@
 <?php
   //require_once ('./Model.php');
   require_once (File::build_path(array("model","Model.php")));
-  class ModelVoiture {
+  class ModelVoiture extends Model{
      
     private $marque;
     private $couleur;
     private $immatriculation;
+    protected static $object = "voiture"; 
         
-    // un getter      
-    public function getMarque() {
-         return $this->marque;  
+    //getter générique
+    public function get($nom_attribut){
+      return $this->$nom_attribut;
     }
 
-    public function getCouleur(){
-        return $this->couleur;
-    }
-
-    public function getImmatriculation(){
-        return $this->immatriculation;
-    }
-       
-    // un setter 
-    public function setMarque($marque2) {
-         $this->marque = $marque2;
-    }
-
-    public function setCouleur($couleur2){
-        $this->couleur = $couleur2;
+    //setter générique
+    public function set($nom_attribut,$value){
+      if ($nom_attribut == immatriculation) {
+        setImmatriculation2($value);
+      }
+      else{
+      $this->$nom_attribut = $value;
+      }
     }
 
     public function setImmatriculation($immatriculation2){

@@ -7,7 +7,7 @@
 
 
 		public static function readAll(){
-			$tab_v = ModelVoiture::getAllVoitures();     //appel au modèle pour gerer la BD
+			$tab_v = ModelVoiture::selectAll();     //appel au modèle pour gerer la BD
 			//require ('../view/voiture/list.php');  //redirige vers la vue
 			//require (File::build_path(array("view","voiture","list.php")));
 			$controller='voiture'; $view='list'; $pagetitle='Liste des voitures';

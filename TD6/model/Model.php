@@ -34,6 +34,21 @@
 		}
 
 
+
+	public static function selectAll(){
+
+		$table_name = static::$object;
+		$class_name = "Model" . ucfirst($table_name);
+
+
+     	$rep = self::$pdo->query("SELECT * FROM {$table_name}");
+
+      	$rep->setFetchMode(PDO::FETCH_CLASS, $class_name);
+
+      	return  $rep->fetchAll();
+    }
+
+
 	}
 	Model::Init();
 ?>

@@ -1,39 +1,22 @@
 <?php
   #liaison avec la classe Model
   require_once 'Model.php';
-  class ModelUtilisateur {
+  class ModelUtilisateur extends Model{
      
     private $login;
     private $nom;
     private $prenom;
+    protected static $object = "utilisateur"; 
 
 
-    //Getters     
-    public function getLogin() {
-         return $this->login;  
+    //getter générique
+    public function get($nom_attribut){
+      return $this->$nom_attribut;
     }
 
-      public function getNom() {
-         return $this->nom;  
-    }
-
-      public function getPrenom() {
-         return $this->prenom;  
-    }
-
-
-
-    //Setters
-    public function setLogin($login) {
-         $this->marque = $login;
-    }
-
-      public function setNom($nom) {
-         $this->marque = $nom;
-    }
-
-      public function setPrenom($prenom) {
-         $this->marque = $prenom;
+    //setter générique
+    public function set($nom_attribut,$value){
+      $this->$nom_attribut = $value;
     }
 
     public function __construct($l = NULL, $n = NULL, $p = NULL)  {
