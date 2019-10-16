@@ -79,28 +79,6 @@
 
 
 
-    public static function deleteByImmat($immat){
-          $sql = "DELETE FROM voiture WHERE immatriculation=:immatriculation";
-
-      $req_prep = Model::$pdo->prepare($sql);
-
-      $values = array(
-          "immatriculation" => $immat
-      );
-      
-      //try{
-        $req_prep->execute($values);
-      /*} catch(PDOException $e) {
-            if($e->getCode() == 23000){
-              return false;
-            }
-        }
-        return true;
-        */
-    }
-
-
-
 
     public static function update($data){
        $sql = "UPDATE voiture SET marque=:marque,couleur=:couleur WHERE immatriculation=:immatriculation";

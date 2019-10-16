@@ -75,6 +75,24 @@
 		    return $tab[0];
 	    }
 
+	    public static function delete($primary){
+	    	$table_name = static::$object;
+			$class_name = "Model" . ucfirst($table_name);
+			$primary_key = static::$primary;
+
+
+			$sql = "DELETE FROM $table_name WHERE $primary_key=:primary";
+
+      		$req_prep = Model::$pdo->prepare($sql);
+
+      		$values = array(
+          		"primary" => $primary
+      		);
+      
+      
+        $req_prep->execute($values);
+	     }
+
 
 	}
 	Model::Init();

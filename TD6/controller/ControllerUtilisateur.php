@@ -29,5 +29,16 @@
 			}
 		}
 
+
+
+		public static function delete(){
+			ModelUtilisateur::delete($_GET['login']);
+			$tab_u = ModelUtilisateur::selectAll();
+			$login = $_GET['login'];
+
+			$view='delete'; $pagetitle='Suppresion utilisateur';
+			require (File::build_path(array("view","view.php")));
+		}
+
 	}
 ?>

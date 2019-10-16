@@ -74,7 +74,7 @@
 
 
 		public static function delete(){
-			ModelVoiture::deleteByImmat($_GET['immatriculation']);
+			ModelVoiture::delete($_GET['immatriculation']);
 			$tab_v = ModelVoiture::selectAll();
 			$immat = $_GET['immatriculation'];
 
@@ -105,7 +105,7 @@
 
 		public static function update(){
 			if(isset($_GET['immatriculation'])){
-				$v = ModelVoiture::getVoitureByImmat($_GET['immatriculation']);
+				$v = ModelVoiture::select($_GET['immatriculation']);
 
 				if($v == false){
 					//require ('../view/voiture/error.php');  //redirige vers la vue d'erreur
@@ -135,7 +135,7 @@
 
 				ModelVoiture::update($data);
 
-				$tab_v = ModelVoiture::getAllVoitures();
+				$tab_v = ModelVoiture::selectAll();
 				$view='updated'; $pagetitle='Mise A Jour';
 				require (File::build_path(array("view","view.php")));
 			}
