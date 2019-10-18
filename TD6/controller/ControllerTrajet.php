@@ -29,5 +29,16 @@
 			}
 		}
 
+
+
+		public static function delete(){
+			ModelTrajet::delete($_GET['id']);
+			$tab_t = ModelTrajet::selectAll();
+			$tid = $_GET['id'];
+
+			$view='delete'; $pagetitle='Suppresion Trajet';
+			require (File::build_path(array("view","view.php")));
+		}
+
 	}
 ?>

@@ -1,17 +1,23 @@
 <?php
-	
-    $vImmatriculation = htmlspecialchars($v->get('immatriculation'));
-    $vMarque = htmlspecialchars($v->get('marque'));
-    $vCouleur = htmlspecialchars($v->get('couleur'));
-
+	$controller = static::$object;
+	$immatParam = "";
+	if($vAction == "create"){
+		$immatParam = "required";
+		$actionAfter = "created";
+		$titreForm = "Création";
+	}else {
+		$immatParam = "readonly";
+		$actionAfter = "updated";
+		$titreForm = "Mise à Jour";
+	}
     echo <<<EOT
 	<form method="get" action="index.php">
 	  <fieldset>
-	    <legend>Mon formulaire de Mise à jour:</legend>
+	    <legend>Mon formulaire de {$titreForm}:</legend>
 	    
 	    <p>
 	      <label for="immat_id">Immatriculation</label> :
-	      <input type="text" value=$vImmatriculation name="immatriculation" id="immat_id" required readonly/>
+	      <input type="text" value=$vImmatriculation name="immatriculation" id="immat_id" {$immatParam}/>
 	    </p>
 
 	    <p>
@@ -25,8 +31,8 @@
 	    </p>
 
 	    <p>
-	      <input type='hidden' name='action' value='updated'>
-	      <input type='hidden' name='controller' value='voiture'>
+	      <input type='hidden' name='action' value={$actionAfter}>
+	      <input type='hidden' name='controller' value={$controller}>
 	      <input type="submit" value="Envoyer" />
 	    </p>
 	  </fieldset> 
