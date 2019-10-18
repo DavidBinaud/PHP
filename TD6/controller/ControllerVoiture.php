@@ -50,7 +50,7 @@
 
 		public static function created(){
 			$v = new ModelVoiture($_GET['marque'],$_GET['couleur'],$_GET['immatriculation']);
-			
+			var_dump(get_object_vars($v));
 			if(ModelVoiture::save($v) == false){
 				$view='errorCreate'; $pagetitle='Erreur de Création';
 				require (File::build_path(array("view","view.php")));

@@ -129,6 +129,41 @@
 
 
 
+
+
+
+	     public static function save($objectParam){
+	     	$table_name = static::$object;
+			$setOrder = '';
+			$setTags = '';
+
+			$values = $objectParam->get_object_vars();
+			foreach ($values as $champ => $valeur){
+				$setOrder = $setOrder . $champ .  ",";
+				$setTags = $setTags . ":" . $champ . ",";
+			}
+
+			$setOrder = rtrim($setOrder,",");
+			$setTags = rtrim($setTags,",");
+
+      		$sql = "INSERT INTO $table_name ($setOrder) VALUES ($setTags)";
+		
+		    $req_prep = Model::$pdo->prepare($sql);
+	
+	      	
+	      	
+	      	try{
+	      	  $req_prep->execute($values);
+	      	} catch(PDOException $e) {
+	      	    if($e->getCode() == 23000){
+	      	    	return false;
+	      	    }
+		    }
+      		return true;
+    }
+
+
+
 	}
 	Model::Init();
 ?>

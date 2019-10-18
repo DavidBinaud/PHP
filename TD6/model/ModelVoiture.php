@@ -48,7 +48,7 @@
              
  
 
-
+    /*
     public static function save($voiture){
       $sql = "INSERT INTO voiture (immatriculation,marque,couleur) VALUES (:immatriculation,:marque,:couleur)";
 
@@ -69,7 +69,12 @@
         }
         return true;
     }
+    */
 
+
+    public function get_object_vars() {
+        return get_object_vars($this);
+    }
 
 
   }

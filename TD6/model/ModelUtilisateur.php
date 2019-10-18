@@ -29,25 +29,10 @@
     }
 
 
-    public static function save($utilisateur){
-      $sql = "INSERT INTO utilisateur (login,nom,prenom) VALUES (:login,:nom,:prenom)";
 
-      $req_prep = Model::$pdo->prepare($sql);
 
-      $values = array(
-          "login" => $utilisateur->login,
-          "nom" => $utilisateur->nom,
-          "prenom" => $utilisateur->prenom
-      );
-      
-      try{
-        $req_prep->execute($values);
-      } catch(PDOException $e) {
-            if($e->getCode() == 23000){
-              return false;
-            }
-        }
-        return true;
+    public function get_object_vars() {
+        return get_object_vars($this);
     }
 
 
