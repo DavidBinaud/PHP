@@ -28,8 +28,40 @@
       }
     }
 
-    public function afficher(){
-      echo "login: " . $this->login . " nom: " . $this->nom . " prenom: " . $this->prenom;
+
+    public static function save($utilisateur){
+      $sql = "INSERT INTO utilisateur (login,nom,prenom) VALUES (:login,:nom,:prenom)";
+
+      $req_prep = Model::$pdo->prepare($sql);
+
+      $values = array(
+          "login" => $utilisateur->login,
+          "nom" => $utilisateur->nom,
+          "prenom" => $utilisateur->prenom
+      );
+      
+      try{
+        $req_prep->execute($values);
+      } catch(PDOException $e) {
+            if($e->getCode() == 23000){
+              return false;
+            }
+        }
+        return true;
+    }
+
+
+    public static function update($data){
+       $sql = "UPDATE utilisateur SET nom=:nom,prenom=:prenom WHERE login=:login";
+
+        $req_prep = Model::$pdo->prepare($sql);
+      
+      //try{
+        $req_prep->execute($data);
+
+
+
+
     }
 
 
