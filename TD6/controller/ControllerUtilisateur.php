@@ -152,6 +152,13 @@
 
 
 
+		public static function error(){
+			$view='error'; $pagetitle='Erreur Nom d\'action';
+			require (File::build_path(array("view","view.php")));
+
+		}
+
+
 
 	}
 ?>

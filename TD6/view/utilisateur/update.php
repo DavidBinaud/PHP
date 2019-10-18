@@ -4,11 +4,11 @@
 	if($uAction == "create"){
 		$loginParam = "required";
 		$actionAfter = "created";
-		$titreForm = "Création";
+		$titreForm = "Création de " . ucfirst(static::$object);
 	}else {
 		$loginParam = "readonly";
 		$actionAfter = "updated";
-		$titreForm = "Mise à Jour";
+		$titreForm = "Mise à Jour de " . ucfirst(static::$object);
 	}
     echo <<<EOT
 	<form method="get" action="index.php">

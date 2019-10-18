@@ -26,20 +26,20 @@
 		public function __construct($data = NULL){
 			if (!is_null($data['id']) && !is_null($data['depart']) && !is_null($data['arrivee'] && !is_null($data['date']) && !is_null($data['nbplaces'])) && !is_null($data['prix']) && !is_null($data['conducteur_login'])) {
 
-				$this->$id = $data['$id'];
-				$this->$depart = $data['$depart'];
-				$this->$arrivee = $data['$arrivee'];
-				$this->$date = $data['$date'];
-				$this->$nbplaces = $data['$nbplaces'];
-				$this->$prix = $data['$prix'];
-				$this->$conducteur_login = $data['$conducteur_login'];
+				$this->id = $data['id'];
+				$this->depart = $data['depart'];
+				$this->arrivee = $data['arrivee'];
+				$this->date = $data['date'];
+				$this->nbplaces = $data['nbplaces'];
+				$this->prix = $data['prix'];
+				$this->conducteur_login = $data['conducteur_login'];
 			}
 		}
 
 
-		public function afficher(){
-			echo "id: " . $this->id . " depart: " . $this->depart . " arrivee: " . $this->arrivee . " date: " . $this->date . " nbplaces: " . $this->nbplaces . " prix: " . $this->prix . " conducteur_login: " . $this->conducteur_login;
-		}
+		public function get_object_vars() {
+       		return get_object_vars($this);
+    	}
 
 
 
