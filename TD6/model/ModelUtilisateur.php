@@ -51,21 +51,6 @@
     }
 
 
-    public static function update($data){
-       $sql = "UPDATE utilisateur SET nom=:nom,prenom=:prenom WHERE login=:login";
-
-        $req_prep = Model::$pdo->prepare($sql);
-      
-      //try{
-        $req_prep->execute($data);
-
-
-
-
-    }
-
-
-
     public static function findTrajets($login){
       $sql = "SELECT T.*
               FROM trajet T

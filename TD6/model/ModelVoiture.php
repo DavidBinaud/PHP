@@ -46,13 +46,7 @@
       }
     } 
              
-    // une methode d'affichage.
-    /*
-    public function afficher() {
-      echo "voiture " . $this->immatriculation . " de marque " . $this->marque . " (couleur " . $this->couleur . ")";
-    }
-    */
-
+ 
 
 
     public static function save($voiture){
@@ -78,19 +72,5 @@
 
 
 
-
-
-    public static function update($data){
-       $sql = "UPDATE voiture SET marque=:marque,couleur=:couleur WHERE immatriculation=:immatriculation";
-
-        $req_prep = Model::$pdo->prepare($sql);
-      
-      //try{
-        $req_prep->execute($data);
-
-
-
-
-    }
   }
 ?>

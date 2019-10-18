@@ -35,6 +35,11 @@
 
 
 
+
+
+
+
+
 		public static function selectAll(){
 
 			$table_name = static::$object;
@@ -47,6 +52,9 @@
 
 	      	return  $rep->fetchAll();
 	    }
+
+
+
 
 
 
@@ -75,9 +83,12 @@
 		    return $tab[0];
 	    }
 
+
+
+
+
 	    public static function delete($primary){
 	    	$table_name = static::$object;
-			$class_name = "Model" . ucfirst($table_name);
 			$primary_key = static::$primary;
 
 
@@ -90,8 +101,32 @@
       		);
       
       
-        $req_prep->execute($values);
+        	$req_prep->execute($values);
 	     }
+
+
+
+
+
+
+
+	     public static function update($data){
+	     	$table_name = static::$object;
+			$primary_key = static::$primary;
+			$set = '';
+			foreach ($data as $champ => $valeur){
+				$set = $set . $champ . "=:" . $champ . ",";
+			}
+			$set = rtrim($set,",");
+
+	     	$sql = "UPDATE $table_name SET $set WHERE $primary_key=:$primary_key";
+
+        	$req_prep = Model::$pdo->prepare($sql);
+      
+      
+        	$req_prep->execute($data);
+	     }
+
 
 
 	}
