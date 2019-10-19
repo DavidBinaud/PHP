@@ -24,8 +24,7 @@
 					require (File::build_path(array("view","view.php")));
 				}else
 				{
-					//require ('../view/voiture/detail.php');  //redirige vers la vue des détails de la voiture
-					//require (File::build_path(array("view","voiture","detail.php")));
+					$tab_t = ModelUtilisateur::findTrajets($_GET['login']);
 					$view='detail'; $pagetitle='Detail utilisateur';
 					require (File::build_path(array("view","view.php")));
 				}
@@ -179,6 +178,26 @@
 
 		}
 
+
+
+
+
+		public static function deleteTrajetFromUser(){
+			if (isset($_GET['login']) && isset($_GET['idTrajet'])) {
+				ModelUtilisateur::deleteTrajet($_GET['idTrajet'],$_GET['login']);
+				$tab_t = ModelUtilisateur::findTrajets($_GET['login']);
+				$u = ModelUtilisateur::select($_GET['login']);
+
+				$view='deleteTrajetFromUser'; $pagetitle='Deletion ; Passagers du Trajet';
+				require (File::build_path(array("view","view.php")));
+			}
+			else{
+				$errorType = "Supprimer la participation d'un utilisateur à un Trajet en tant que passager: problème de paramètres";
+				$view='error'; $pagetitle='Erreur deleteTrajetFromUser';
+				require (File::build_path(array("view","view.php")));
+			}
+			
+		}
 
 
 	}

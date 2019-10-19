@@ -58,5 +58,20 @@
     }
 
 
+    public static function deleteTrajet($id,$login){
+      $sql = "DELETE FROM passager WHERE trajet_id =:trajetid AND utilisateur_login =:login";
+
+        $req_prep = Model::$pdo->prepare($sql);
+
+        $values = array(
+            "trajetid" => $id,
+            "login" => $login
+        );
+    
+        $req_prep->execute($values);
+    }
+
+
+
   }
 ?>

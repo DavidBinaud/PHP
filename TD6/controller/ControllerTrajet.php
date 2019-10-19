@@ -36,7 +36,7 @@
 					require (File::build_path(array("view","view.php")));
 				}else
 				{
-					$tab_u = $t->findPassagers($_GET['id']);
+					$tab_u = ModelTrajet::findPassagers($_GET['id']);
 					$view='detail'; $pagetitle='Detail Trajet';
 					require (File::build_path(array("view","view.php")));
 				}

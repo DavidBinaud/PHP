@@ -7,4 +7,7 @@
         	<p> Utilisateur de login $uLogin, de nom $uNom et de prenom $uPrenom.
         	(<a href=index.php?action=update&controller=utilisateur&login=$uLoginURL >Mettre A Jour</a>)</p>
 EOT;
+	
+
+	require (File::build_path(array("view",static::$object,"trajetUser.php")));
 ?>

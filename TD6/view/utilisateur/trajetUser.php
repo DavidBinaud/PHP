@@ -1,10 +1,13 @@
 <?php
-
-	require (File::build_path(array("view",static::$object,"detail.php")));
-	echo "Liste des Trajets pour l'utilisateur " . $u->get('login') . ":";
+	echo "<p>Liste des Trajets(Passager) pour l'utilisateur " . $u->get('login') . ":<br>";
+	$uLoginUrl = rawurlencode($u->get('login'));
 	foreach ($tab_t as $t) {
-		require (File::build_path(array("view","trajet","detail.php")));
+		$tIdURL = rawurlencode($t->get('id'));
+        $tId = htmlspecialchars($t->get('id'));
+		echo "Trajet d' Id <a href=index.php?action=read&controller=trajet&id=$tIdURL > $tId </a> 
+        	   --(<a href=index.php?action=deleteTrajetFromUser&controller=utilisateur&idTrajet=$tIdURL&login=$uLoginUrl >Supprimer sa participation au Trajet</a>)";
 	}
+	echo "</p>";
 
 
 
