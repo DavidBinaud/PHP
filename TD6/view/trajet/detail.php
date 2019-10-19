@@ -12,4 +12,6 @@
         	<p> Trajet d'id $tId , au départ de $tdepart , à destination de $tarrivee , le $tdate , avec $tnbplaces places, au prix de $tprix € et le conducteur est $tconducteur_login.
         	(<a href=index.php?action=update&controller=trajet&id=$tIdURL >Mettre A Jour</a>)</p>
 EOT;
+
+    require (File::build_path(array("view",static::$object,"userOfTrajet.php")));
 ?>

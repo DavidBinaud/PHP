@@ -67,5 +67,47 @@
 		}
 
 
+
+
+
+
+
+		public static function deletePassagers($id,$login_passager){
+			$sql = "DELETE FROM passager WHERE trajet_id =:trajetid AND utilisateur_login =:passager";
+
+    		$req_prep = Model::$pdo->prepare($sql);
+
+		    $values = array(
+		        "trajetid" => $id,
+		        "passager" => $login_passager
+		    );
+    
+    		$req_prep->execute($values);
+		}
+
+
+
+		public static function addPassager($id,$login_passager){
+      		$sql = "INSERT INTO passager (trajet_id,utilisateur_login) VALUES (:id,:loginPassager)";
+		    $req_prep = Model::$pdo->prepare($sql);
+			
+			$values = array(
+				"id" => $id,
+				"loginPassager" => $login_passager
+			);
+	      	
+	      	
+	      	try{
+	      	  $req_prep->execute($values);
+	      	} catch(PDOException $e) {
+	      	    if($e->getCode() == 23000){
+	      	    	return false;
+	      	    }
+		    }
+      		return true;
+
+		}
+
+
 	}
 ?>

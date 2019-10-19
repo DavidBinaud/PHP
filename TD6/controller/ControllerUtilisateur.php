@@ -153,8 +153,29 @@
 
 
 		public static function error(){
+			if (!isset($errorType)) {
+				$errorType = "Inconnue";
+			}
 			$view='error'; $pagetitle='Erreur Nom d\'action';
 			require (File::build_path(array("view","view.php")));
+
+		}
+
+
+
+		public static function readTrajetOfUser(){
+			if(isset($_GET['login'])){
+				$tab_t = ModelUtilisateur::findTrajets($_GET['login']);
+				$u = ModelUtilisateur::select($_GET['login']);
+
+				$view='trajetUser'; $pagetitle='Trajet de l\'utilisateur';
+				require (File::build_path(array("view","view.php")));
+
+			}else{
+				$errorType = "Trouver Les Trajets d'un utilisateur: Pas de login Fourni";
+				$view='error'; $pagetitle='Erreur Lecture';
+				require (File::build_path(array("view","view.php")));
+			}
 
 		}
 

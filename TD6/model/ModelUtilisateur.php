@@ -50,7 +50,7 @@
     
         $req_prep->execute($values);
 
-        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'Trajet');
+        $req_prep->setFetchMode(PDO::FETCH_CLASS, 'ModelTrajet');
 
         return $req_prep->fetchAll();
 
