@@ -143,8 +143,8 @@
 
 
 
-    				$vAction = "update";
 
+    				$tAction = "update";
 					$view='update'; $pagetitle='Mise A Jour';
 					require (File::build_path(array("view","view.php")));
 				}
@@ -249,8 +249,9 @@
 
 				}else{
 					$tid = htmlspecialchars($_GET['id']);
-					$tab_Allu = ModelUtilisateur::selectAll();
 
+					$tab_Allu = ModelUtilisateur::selectAll();
+					
 					$view='ajoutPassager'; $pagetitle='Ajout Passager';
 					require (File::build_path(array("view","view.php")));
 				}
