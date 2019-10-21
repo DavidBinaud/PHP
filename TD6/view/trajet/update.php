@@ -2,12 +2,16 @@
 	$controller = static::$object;
 	$loginParam = "";
 	if($tAction == "create"){
-		$loginParam = "required";
+		$loginParam = "";
 		$actionAfter = "created";
+		$idType = "hidden";
+		$label = "";
 		$titreForm = "Création de " . ucfirst(static::$object);
 	}else {
 		$loginParam = "readonly";
 		$actionAfter = "updated";
+		$idType = "text";
+		$label ="<label for=\"id_id\">Id</label> :";
 		$titreForm = "Mise à Jour de " . ucfirst(static::$object);
 	}
 
@@ -17,8 +21,8 @@
 	    <legend>Mon formulaire de {$titreForm}:</legend>
 	    
 	    <p>
-	      <label for="id_id">Id</label> :
-	      <input type="text" value=$tid name="id" id="id_id" {$loginParam}/>
+	      $label
+	      <input type=$idType value=$tid name="id" id="id_id" {$loginParam}/>
 	    </p>
 	    
 	    <p>
