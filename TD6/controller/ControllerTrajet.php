@@ -174,15 +174,23 @@
 					'prix' => $_GET['prix'], 
 					'conducteur_login' => $_GET['conducteur_login'],
 				);
-
-				ModelTrajet::update($data);
-
-				$tab_t = ModelTrajet::selectAll();
-				$view='updated'; $pagetitle='Mise A Jour';
-				require (File::build_path(array("view","view.php")));
+				$t_passagers = ModelTrajet::findPassagers($_GET['id']);
+				if (in_array($_GET['conducteur_login'],$t_passagers)) {
+					ModelTrajet::update($data);
+	
+					$tab_t = ModelTrajet::selectAll();
+					$view='updated'; $pagetitle='Mise A Jour';
+					require (File::build_path(array("view","view.php")));
+				}else{
+					$errorType = "Update d'un Trajet: Le nouveau conducteur ne peut pas être un des passagers du trajet.";
+					$view='error'; $pagetitle='Erreur Update';
+					require (File::build_path(array("view","view.php")));
+				}
 			}
 			else{
-				self::error();
+				$errorType = "Update d'un Trajet: Problème de paramètres";
+				$view='error'; $pagetitle='Erreur Update';
+				require (File::build_path(array("view","view.php")));
 			}
 		}
 
@@ -260,7 +268,7 @@
 			if (isset($_GET['id']) && isset($_GET['loginPassager'])) {
 				$t = ModelTrajet::select($_GET['id']);
 				// on vérifie que le trajet d'id donné existe
-				if ($t != false){
+				if ($t == true){
 					$tab_u = ModelTrajet::findPassagers($_GET['id']);
 					//on vérifie qu'il reste des places sur le trajet
 					if (count($tab_u) < $t->get('nbplaces')) {
