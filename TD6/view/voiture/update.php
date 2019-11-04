@@ -10,24 +10,27 @@
 		$actionAfter = "updated";
 		$titreForm = "Mise à Jour de " . ucfirst(static::$object);
 	}
-    echo <<<EOT
+
+?>
 	<form method="get" action="index.php">
 	  <fieldset>
-	    <legend>Mon formulaire de {$titreForm}:</legend>
+
+	    <legend>Mon formulaire de <?php echo $titreForm;?>:</legend>
 	    
 	    <p>
 	      <label for="immat_id">Immatriculation</label> :
-	      <input type="text" value=$vImmatriculation name="immatriculation" id="immat_id" {$immatParam}/>
+	      <input type="text" value=<?php echo $vImmatriculation; ?> name="immatriculation" id="immat_id" <?php echo $immatParam; ?>/>
 	    </p>
 
 	    <p>
 	      <label for="marque_id">Marque</label> :
-	      <input type="text" value=$vMarque name="marque" id="marque_id" required/>
+
+	      <input type="text" value=<?php echo $vMarque;?> name="marque" id="marque_id" required/>
 	    </p>
 
 	    <p>
 	      <label for="coul_id">Couleur</label> :
-	      <input type="text" value=$vCouleur name="couleur" id="coul_id" required/>
+	      <input type="text" value=<?php echo $vCouleur;?> name="couleur" id="coul_id" required/>
 	    </p>
 
 	    <p>
@@ -37,7 +40,4 @@
 	    </p>
 	  </fieldset> 
 	</form>
-EOT;
 
-
-?>

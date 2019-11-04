@@ -114,7 +114,7 @@
     				$uLogin = htmlspecialchars($u->get('login'));
     				$uNom = htmlspecialchars($u->get('nom'));
     				$uPrenom = htmlspecialchars($u->get('prenom'));
-    				$vAction = "update";
+    				$uAction = "update";
 
 					$view='update'; $pagetitle='Mise A Jour';
 					require (File::build_path(array("view","view.php")));
