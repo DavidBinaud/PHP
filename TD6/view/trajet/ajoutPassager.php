@@ -6,20 +6,21 @@
 		$select = $select . "<option value=$uLogin>$uLogin</option>";
 	}
 	$select = $select . "</select>";
+?>
 	
-    echo <<<EOT
+    <!--echo <<<EOT-->
 	<form method="get" action="index.php">
 	  <fieldset>
 	    <legend>Mon formulaire d'ajout de Passager:</legend>
 	    
 	    <p>
 	      <label for="id_id">Id</label> :
-	      <input type="text" value=$tid name="id" id="id_id" required readonly/>
+	      <input type="text" value="<?php echo $tid; ?>" name="id" id="id_id" required readonly/>
 	    </p>
 	    
 	    <p>
 	      <label for="loginPassager_id">Login Passager</label> :
-	      $select
+	      <?php echo $select; ?>
 	    </p>
 	    
 
@@ -30,7 +31,4 @@
 	    </p>
 	  </fieldset> 
 	</form>
-EOT;
-
-
-?>
+<!--EOT;-->
