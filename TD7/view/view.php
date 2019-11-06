@@ -11,6 +11,7 @@
 			  <a href="index.php?action=readAll&controller=voiture">Gestion Voitures</a>
 			  <a href="index.php?action=readAll&controller=utilisateur">Gestion Utilisateurs</a>
 			  <a href="index.php?action=readAll&controller=trajet">Gestion Trajets</a>
+              <a href="preference.html">Preference</a>
 			</div>
     	</header>
 

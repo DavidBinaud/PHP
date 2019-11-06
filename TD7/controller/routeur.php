@@ -5,6 +5,11 @@
 	require_once (File::build_path(array("controller","ControllerTrajet.php")));
 	// On recupère l'action passée dans l'URL
 
+	$controller_default = "voiture";
+
+	if(isset($_COOKIE['preference']) && in_array($_COOKIE['preference'], array("voiture","utilisateur","trajet"))){
+		$controller_default = $_COOKIE['preference'];
+	}
 
 	//Verifie qu'une action est passée dans l'url ; Si aucune action on fait l'action de base readALL
 	if(isset($_GET['action']) && isset($_GET['controller'])){
@@ -33,7 +38,7 @@
 		}
 	}
 	else{
-		$controller_class='ControllerVoiture';
+		$controller_class= 'Controller' . ucfirst($controller_default);
 		$action = 'readAll';
 	}
 	$controller_class::$action();
