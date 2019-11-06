@@ -7,8 +7,10 @@
 
 	$controller_default = "voiture";
 
-	if(isset($_COOKIE['preference']) && in_array($_COOKIE['preference'], array("voiture","utilisateur","trajet"))){
+	if(isset($_COOKIE) && isset($_COOKIE['preference']) && in_array($_COOKIE['preference'], array("voiture","utilisateur","trajet"))){
 		$controller_default = $_COOKIE['preference'];
+	}elseif (isset($pref_accueil)) {
+		$controller_default = $pref_accueil;
 	}
 
 	//Verifie qu'une action est passée dans l'url ; Si aucune action on fait l'action de base readALL
