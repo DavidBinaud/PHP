@@ -11,6 +11,7 @@
     			<th>Immatriculation</th>
     			<th>Marque</th>
     			<th>Couleur</th>
+    			<th>Action</th>
 			<tr>
 EOT;
 
@@ -24,6 +25,17 @@ EOT;
     			<td>$vImmatriculation (<a href=index.php?action=update&controller=voiture&immatriculation=$vImmatriculationURL >MaJ</a>)</td>
     			<td>$vMarque</td>
     			<td>$vCouleur</td>
+    			<td>
+    				<div class="dropdown">
+  						<button class="dropbtn">Dropdown</button>
+  						<div class="dropdown-content">
+    						<a href="#">Link 1</a>
+    						<a href="#">Link 2</a>
+    						<a href="#">Link 3</a>
+  						</div>
+					</div>
+					
+    			</td>
 			<tr>
 EOT;
 	}
