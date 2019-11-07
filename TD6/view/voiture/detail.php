@@ -5,6 +5,7 @@
     $vCouleur = htmlspecialchars($v->get('couleur'));
     echo <<<EOT
         	<p> Voiture d'immatriculation $vImmatriculation, de marque $vMarque et de couleur $vCouleur.
-        	(<a href=index.php?action=update&controller=voiture&immatriculation=$vImmatriculationURL >Mettre A Jour</a>)</p>
+        	(<a href=index.php?action=update&controller=voiture&immatriculation=$vImmatriculationURL >Mettre A Jour</a>)
+        	(<a href=index.php?action=addpanier&controller=voiture&immatriculation=$vImmatriculationURL >Ajouter au Panier</a>)</p>
 EOT;
 ?>

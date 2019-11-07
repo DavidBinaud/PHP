@@ -144,6 +144,12 @@
 				self::error();
 			}
 		}
+
+
+		public static function addpanier(){
+			$view='addedpanier'; $pagetitle='Ajouté au panier';
+			require (File::build_path(array("view","view.php")));
+		}
 		
 	}
 ?>
