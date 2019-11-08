@@ -147,7 +147,35 @@
 
 
 		public static function addpanier(){
-			$view='addedpanier'; $pagetitle='Ajouté au panier';
+			if(isset($_GET['immatriculation'])){
+				$v = ModelVoiture::select($_GET['immatriculation']);
+				if ($v == true) {
+					if(isset($_COOKIE) && isset($_COOKIE['panier'])){
+						$panier = unserialize($_COOKIE['panier']);
+						$immat = $_GET['immatriculation'];
+						if(in_array($immat, contenue dans les immats du panier)){
+							$qte = $qte + 1;
+						}else{
+							$qte = 1;
+						}
+						$panier[] = array('immatriculation' => $v->get('immatriculation'), 'quantité' => $qte);
+					}else{
+						$toCookie = array('immatriculation' => $v->get('immatriculation'), 'quantité' => 1);
+						setcookie ("panier", serialize($toCookie), time() +3600);
+					}
+					
+					$view='addedpanier'; $pagetitle='Ajouté au panier';
+				}else{
+					$view='error'; $pagetitle='Erreur';$errorType = 'add panier, id produit inexistant';
+				}
+			}else{
+				$view='error'; $pagetitle='Erreur';$errorType = 'add panier, probleme parametre';
+			}
+			require (File::build_path(array("view","view.php")));
+		}
+
+		public static function getpanier(){
+			$view='panier'; $pagetitle='panier';
 			require (File::build_path(array("view","view.php")));
 		}
 		

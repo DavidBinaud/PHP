@@ -12,7 +12,7 @@
 			  <a href="index.php?action=readAll&controller=utilisateur">Gestion Utilisateurs</a>
 			  <a href="index.php?action=readAll&controller=trajet">Gestion Trajets</a>
               <a href="preference.html">Preference</a>
-              <a href="panier.php">Panier</a>
+              <a href="index.php?action=getpanier&controller=voiture">Panier</a>
 			</div>
     	</header>
 
