@@ -34,8 +34,8 @@
 	    </p>
 
 	    <p>
-	      <input type='hidden' name='action' value={$actionAfter}>
-	      <input type='hidden' name='controller' value={$controller}>
+	      <input type='hidden' name='action' value=<?php echo $actionAfter;?>>
+	      <input type='hidden' name='controller' value=<?php echo $controller;?>>
 	      <input type="submit" value="Envoyer" />
 	    </p>
 	  </fieldset> 
