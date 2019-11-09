@@ -153,14 +153,26 @@
 					if(isset($_COOKIE) && isset($_COOKIE['panier'])){
 						$panier = unserialize($_COOKIE['panier']);
 						$immat = $_GET['immatriculation'];
-						if(in_array($immat, contenue dans les immats du panier)){
-							$qte = $qte + 1;
+
+						// foreach ($panier as $lignepanier) {
+						// 	if($lignepanier['immatriculation'] == $immat){
+						// 		$lignepanier['qté']++;
+						// 	}
+						// }
+
+						$index = array_search($immat, array_column($panier, 'immatriculation'));
+
+						//on doit faire une comparaison stricte dans le cas ou l'index 0 serait celui trouvé car 0 != false renvoie false
+						if($index !== false){
+							$panier[$index]['quantité'] = $panier[$index]['quantité'] + 1;
 						}else{
-							$qte = 1;
+							$panier[] = array('immatriculation' => $v->get('immatriculation'), 'quantité' => 1);
 						}
-						$panier[] = array('immatriculation' => $v->get('immatriculation'), 'quantité' => $qte);
+						
+
+						setcookie ("panier", serialize($panier), time() +3600);
 					}else{
-						$toCookie = array('immatriculation' => $v->get('immatriculation'), 'quantité' => 1);
+						$toCookie = array( 0 => array('immatriculation' => $v->get('immatriculation'), 'quantité' => 1));
 						setcookie ("panier", serialize($toCookie), time() +3600);
 					}
 					
