@@ -1,5 +1,4 @@
-<?php
-	echo <<<EOT
+
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<table style="border: 1px solid #333;">
 		<thead>
@@ -14,8 +13,8 @@
     			<th>Couleur</th>
     			<th>Action</th>
 			<tr>
-EOT;
 
+<?php
 	foreach ($tab_v as $v) {
 		$vImmatriculation = htmlspecialchars($v->get('immatriculation'));
     	$vImmatriculationURL = rawurlencode($v->get('immatriculation'));
@@ -33,9 +32,7 @@ EOT;
 			<tr>
 EOT;
 	}
-	echo <<<EOT
-		</tbody>
-	</table>
-EOT;
+	echo "</tbody>
+	</table>";
 
 ?>
