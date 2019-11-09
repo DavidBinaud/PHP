@@ -1,5 +1,6 @@
 <?php
 	echo <<<EOT
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<table style="border: 1px solid #333;">
 		<thead>
 	        <tr>
@@ -22,19 +23,12 @@ EOT;
     	$vCouleur = htmlspecialchars($v->get('couleur'));
 	    echo <<<EOT
 	    	<tr>
-    			<td>$vImmatriculation (<a href=index.php?action=update&controller=voiture&immatriculation=$vImmatriculationURL >MaJ</a>)</td>
+    			<td>$vImmatriculation</td>
     			<td>$vMarque</td>
     			<td>$vCouleur</td>
     			<td>
-    				<div class="dropdown">
-  						<button class="dropbtn">Dropdown</button>
-  						<div class="dropdown-content">
-    						<a href="#">Link 1</a>
-    						<a href="#">Link 2</a>
-    						<a href="#">Link 3</a>
-  						</div>
-					</div>
-					
+    				<button onclick="window.location.href = 'index.php?action=delete&controller=voiture&immatriculation=$vImmatriculationURL';"><i class="fa fa-trash"></i></button>
+					<button onclick="window.location.href = 'index.php?action=update&controller=voiture&immatriculation=$vImmatriculationURL';"><i class="fa fa-edit"></i></button>
     			</td>
 			<tr>
 EOT;
