@@ -150,8 +150,8 @@
 			if(isset($_GET['immatriculation'])){
 				$v = ModelVoiture::select($_GET['immatriculation']);
 				if ($v == true) {
-					if(isset($_COOKIE) && isset($_COOKIE['panier'])){
-						$panier = unserialize($_COOKIE['panier']);
+					if(isset($_SESSION) && isset($_SESSION['panier'])){
+						$panier = $_SESSION['panier'];
 						$immat = $_GET['immatriculation'];
 
 						// foreach ($panier as $lignepanier) {
@@ -164,16 +164,12 @@
 
 						//on doit faire une comparaison stricte dans le cas ou l'index 0 serait celui trouvé car 0 != false renvoie false
 						if($index !== false){
-							$panier[$index]['quantité'] = $panier[$index]['quantité'] + 1;
+							$_SESSION['panier'][$index]['quantité'] = $_SESSION['panier'][$index]['quantité'] + 1;
 						}else{
-							$panier[] = array('immatriculation' => $v->get('immatriculation'), 'quantité' => 1);
+							$_SESSION['panier'][] = array('immatriculation' => $v->get('immatriculation'), 'quantité' => 1);
 						}
-						
-
-						setcookie ("panier", serialize($panier), time() +3600);
 					}else{
-						$toCookie = array( 0 => array('immatriculation' => $v->get('immatriculation'), 'quantité' => 1));
-						setcookie ("panier", serialize($toCookie), time() +3600);
+						$_SESSION['panier'][] = array('immatriculation' => $v->get('immatriculation'), 'quantité' => 1);
 					}
 					
 					$view='addedpanier'; $pagetitle='Ajouté au panier';
@@ -187,7 +183,14 @@
 		}
 
 		public static function getpanier(){
+
+			if(isset($_SESSION) && isset($_SESSION['panier'])){
+				$panier = $_SESSION['panier'];
+			}
 			$view='panier'; $pagetitle='panier';
+			// else{
+			// 	$view='error'; $pagetitle='Error'; $errorType = "Pas de session";
+			// }
 			require (File::build_path(array("view","view.php")));
 		}
 		
