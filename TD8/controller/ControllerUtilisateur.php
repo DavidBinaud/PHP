@@ -53,23 +53,27 @@
 
 
 		public static function created(){
-			if (isset($_GET['login']) & isset($_GET['nom']) & isset($_GET['prenom'])){
-				
-				$u = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom']);
-				
-				if(ModelUtilisateur::save($u) == false){
-					$view='errorCreate'; $pagetitle='Erreur de Création';
-					require (File::build_path(array("view","view.php")));
+			if (isset($_GET['login'],$_GET['nom'],$_GET['prenom'],$_GET['pass'],$_GET['passconfirm'])){
+				if ($_GET['pass'] == $_GET['passconfirm']) {
+						
+					$u = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom']);
+					
+					if(ModelUtilisateur::save($u) == false){
+						$view='errorCreate'; $pagetitle='Erreur de Création';
+	
+					}else{
+						$tab_u = ModelUtilisateur::selectAll();
+						$view='created'; $pagetitle='Création Reussie';
+	
+					}
 				}else{
-					$tab_u = ModelUtilisateur::selectAll();
-					$view='created'; $pagetitle='Création Reussie';
-					require (File::build_path(array("view","view.php")));
+					$view='error'; $pagetitle='Erreur de Création'; $errorType="Created utilisateur: mot de passe qui ne sont pas égaux";
 				}
 
 			}else{
-				$view='errorCreate'; $pagetitle='Erreur de Création';
-				require (File::build_path(array("view","view.php")));
+				$view='error'; $pagetitle='Erreur de Création'; $errorType="Created utilisateur: probleme de paramètres";
 			}
+			require (File::build_path(array("view","view.php")));
 			
 		}
 

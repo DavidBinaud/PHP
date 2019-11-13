@@ -180,7 +180,7 @@
 				$view='error'; $pagetitle='Erreur';$errorType = 'add panier, probleme parametre';
 			}
 			require (File::build_path(array("view","view.php")));
-		}
+		}	
 
 		public static function getpanier(){
 
