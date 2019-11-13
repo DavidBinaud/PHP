@@ -2,6 +2,7 @@
 
 	require_once (File::build_path(array("model","ModelUtilisateur.php")));
 	require_once (File::build_path(array("lib","Security.php")));
+	require_once (File::build_path(array("lib","Session.php")));
 	class ControllerUtilisateur{
 		protected static $object = 'utilisateur';
 
@@ -90,9 +91,13 @@
 		public static function delete(){
 			if (isset($_GET['login'])) {
 				$login = $_GET['login'];
-				ModelUtilisateur::delete($login);
-				$tab_u = ModelUtilisateur::selectAll();
-				$view='delete'; $pagetitle='Suppresion utilisateur';
+				if(Session::is_user($login)){
+					ModelUtilisateur::delete($login);
+					$tab_u = ModelUtilisateur::selectAll();
+					$view='delete'; $pagetitle='Suppresion utilisateur';
+				}else{
+					$view = 'connect'; $pagetitle = 'Connexion';
+				}
 			}
 			else{
 				$view = 'error'; $pagetitle ='ErreurUserDelete'; $errorType = 'Delete Utilisateur: Pas de Login fourni';
@@ -114,12 +119,15 @@
 					$view = 'error'; $pagetitle ='ErreurUserDelete'; $errorType = 'Update Utilisateur: Login fourni inexistant';
 				}
 				else{
-
-    				$uLogin = htmlspecialchars($u->get('login'));
-    				$uNom = htmlspecialchars($u->get('nom'));
-    				$uPrenom = htmlspecialchars($u->get('prenom'));
-    				$uAction = "update";
-					$view='update'; $pagetitle='Mise A Jour';
+					if (Session::is_user($_GET['login'])) {
+	    				$uLogin = htmlspecialchars($u->get('login'));
+	    				$uNom = htmlspecialchars($u->get('nom'));
+	    				$uPrenom = htmlspecialchars($u->get('prenom'));
+	    				$uAction = "update";
+						$view='update'; $pagetitle='Mise A Jour';
+					}else{
+						$view = 'connect'; $pagetitle = 'Connexion';
+					}
 				}
 			}
 			else{
@@ -135,17 +143,21 @@
 		public static function updated(){
 			if(isset($_GET['login'],$_GET['nom'],$_GET['prenom'],$_GET['pass'])){
 				if ($_GET['pass'] == $_GET['passconfirm']) {
-					$data = array(
-						"login" => $_GET['login'],
-						"nom" => $_GET['nom'],
-						"prenom" => $_GET['prenom'],
-						"mdp" => Security::chiffrer($_GET['pass'])
-					);
+					if(Session::is_user($_GET['login'])){
+						$data = array(
+							"login" => $_GET['login'],
+							"nom" => $_GET['nom'],
+							"prenom" => $_GET['prenom'],
+							"mdp" => Security::chiffrer($_GET['pass'])
+						);
+					
+						ModelUtilisateur::update($data);
 
-					ModelUtilisateur::update($data);
-
-					$tab_u = ModelUtilisateur::selectAll();
-					$view='updated'; $pagetitle='Mise A Jour';
+						$tab_u = ModelUtilisateur::selectAll();
+						$view='updated'; $pagetitle='Mise A Jour';
+					}else{
+					$view = 'connect'; $pagetitle ='Connexion';
+				}
 				}else{
 					$view = 'error'; $pagetitle ='ErreurUserUpdated'; $errorType = 'Updated Utilisateur: mots de passe sont différents';
 				}
