@@ -1,6 +1,7 @@
 <?php
 
 	require_once (File::build_path(array("model","ModelUtilisateur.php")));
+	require_once (File::build_path(array("lib","Security.php")));
 	class ControllerUtilisateur{
 		protected static $object = 'utilisateur';
 
@@ -51,7 +52,7 @@
 			if (isset($_GET['login'],$_GET['nom'],$_GET['prenom'],$_GET['pass'],$_GET['passconfirm'])){
 				if ($_GET['pass'] == $_GET['passconfirm']) {
 						
-					$u = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'],$_GET['pass']);
+					$u = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'],Security::chiffrer($_GET['pass']));
 					
 					if(ModelUtilisateur::save($u) == false){
 						$view='errorCreate'; $pagetitle='Erreur de Création';
@@ -138,7 +139,7 @@
 						"login" => $_GET['login'],
 						"nom" => $_GET['nom'],
 						"prenom" => $_GET['prenom'],
-						"mdp" => $_GET['pass']
+						"mdp" => Security::chiffrer($_GET['pass'])
 					);
 
 					ModelUtilisateur::update($data);
