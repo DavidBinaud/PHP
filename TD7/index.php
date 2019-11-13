@@ -1,7 +1,7 @@
 <?php
 	session_set_cookie_params(30*60);
 	session_start();
-	if (isset($_COOKIE,$_COOKIE['PHPSESSID']) && $_COOKIE['PHPSESSID'] == 'xyz') {
+	if (isset($_COOKIE,$_COOKIE['PHPSESSID']) && $_COOKIE['PHPSESSID'] == 'inconnu') {
 		
 		if (isset($_SESSION['LAST_ACTIVITY']) && time() - $_SESSION['LAST_ACTIVITY'] > (10*60)) {
 	     	// if last request was more than 30 minutes ago
@@ -34,6 +34,6 @@
 		require_once (File::build_path(array("controller","routeur.php")));
 	}
 	else{
-		echo 'NIQUE TA MERE';
+		echo 'Acces Restreint';
 	}
 ?>
