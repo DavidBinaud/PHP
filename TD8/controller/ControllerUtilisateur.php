@@ -91,7 +91,7 @@
 		public static function delete(){
 			if (isset($_GET['login'])) {
 				$login = $_GET['login'];
-				if(Session::is_user($login)){
+				if(Session::is_user($login) || Session::is_admin()){
 					ModelUtilisateur::delete($login);
 					$tab_u = ModelUtilisateur::selectAll();
 					$view='delete'; $pagetitle='Suppresion utilisateur';
@@ -119,7 +119,7 @@
 					$view = 'error'; $pagetitle ='ErreurUserDelete'; $errorType = 'Update Utilisateur: Login fourni inexistant';
 				}
 				else{
-					if (Session::is_user($_GET['login'])) {
+					if (Session::is_user($_GET['login']) || Session::is_admin()) {
 	    				$uLogin = htmlspecialchars($u->get('login'));
 	    				$uNom = htmlspecialchars($u->get('nom'));
 	    				$uPrenom = htmlspecialchars($u->get('prenom'));
@@ -143,7 +143,7 @@
 		public static function updated(){
 			if(isset($_GET['login'],$_GET['nom'],$_GET['prenom'],$_GET['pass'])){
 				if ($_GET['pass'] == $_GET['passconfirm']) {
-					if(Session::is_user($_GET['login'])){
+					if(Session::is_user($_GET['login']) || Session::is_admin()){
 						$data = array(
 							"login" => $_GET['login'],
 							"nom" => $_GET['nom'],
@@ -229,6 +229,7 @@
 			if(isset($_GET['login'],$_GET['pass'])){
 				if(ModelUtilisateur::checkPassword($_GET['login'],Security::chiffrer($_GET['pass']))){
 					$u = ModelUtilisateur::select($_GET['login']);
+					$_SESSION['admin'] = $u->get('admin');
 					$tab_t = ModelUtilisateur::findTrajets($_GET['login']);
 					$_SESSION['login'] = $_GET['login'];
 

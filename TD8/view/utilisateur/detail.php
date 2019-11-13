@@ -5,7 +5,7 @@
     $uPrenom = htmlspecialchars($u->get('prenom'));
     echo "<p> Utilisateur de login $uLogin, de nom $uNom et de prenom $uPrenom.";
 
-    if(Session::is_user($uLogin)){
+    if(Session::is_user($uLogin) || Session::is_admin()){
         	echo "(<a href=index.php?action=update&controller=utilisateur&login=$uLoginURL >Mettre A Jour</a>)
         	(<a href=index.php?action=delete&controller=utilisateur&login=$uLoginURL >Supprimer</a>)</p>";
     }else{

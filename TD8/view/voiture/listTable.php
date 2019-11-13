@@ -11,7 +11,10 @@
     			<th>Immatriculation</th>
     			<th>Marque</th>
     			<th>Couleur</th>
-    			<th>Action</th>
+    			<?php if(Session::is_admin()){
+    				echo "<th>Action</th>";
+    			}
+    			?>
 			<tr>
 
 <?php
@@ -20,17 +23,21 @@
     	$vImmatriculationURL = rawurlencode($v->get('immatriculation'));
     	$vMarque = htmlspecialchars($v->get('marque'));
     	$vCouleur = htmlspecialchars($v->get('couleur'));
-	    echo <<<EOT
-	    	<tr>
+	    echo "<tr>
     			<td>$vImmatriculation</td>
     			<td>$vMarque</td>
     			<td>$vCouleur</td>
+    			";
+
+    			if(Session::is_admin()){
+    				echo "
     			<td>
-    				<button onclick="window.location.href = 'index.php?action=delete&controller=voiture&immatriculation=$vImmatriculationURL';"><i class="fa fa-trash"></i></button>
-					<button onclick="window.location.href = 'index.php?action=update&controller=voiture&immatriculation=$vImmatriculationURL';"><i class="fa fa-edit"></i></button>
+    				<button onclick=\"window.location.href = 'index.php?action=delete&controller=voiture&immatriculation=$vImmatriculationURL';\"><i class=\"fa fa-trash\"></i></button>
+					<button onclick=\"window.location.href = 'index.php?action=update&controller=voiture&immatriculation=$vImmatriculationURL';\"><i class=\"fa fa-edit\"></i></button>
     			</td>
 			<tr>
-EOT;
+			";
+				}
 	}
 	echo "</tbody>
 	</table>";
