@@ -222,10 +222,20 @@
 
 					$view='detail'; $pagetitle='Connexion';
 				}else{
-					$view='error'; $pagetitle='Erreur deleteTrajetFromUser'; $errorType = 'Aucun Login et Mot de passe existant';
+					$view='error'; $pagetitle='Erreur deleteTrajetFromUser'; $errorType = 'Login et Mot de passe incorrect';
 				}
 			}
 			require (File::build_path(array("view","view.php")));
+		}
+
+
+		public static function deconnect(){
+			session_unset();
+			session_destroy();
+			setcookie(session_name(),'',-1);
+			$pagetitle='Deconnection';
+			header('Location: index.php');
+			exit(); 
 		}
 
 
