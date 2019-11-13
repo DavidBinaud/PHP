@@ -8,7 +8,7 @@
 			}
 			echo "<br>";
 		}
-		echo '</p>';
+		echo "Prix Panier {$_SESSION['prixpanier']} </p>";
 	}else{
 		echo "panier vide";
 	}
