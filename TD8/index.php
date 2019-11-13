@@ -1,4 +1,6 @@
 <?php
+	// session_set_cookie_params(30*60,"/~binaudd");
+	// pour faire en sorte que nos cookies sessions ne s'appliquent que sur notre site perso
 	session_set_cookie_params(30*60);
 	session_start();
 	if (isset($_COOKIE,$_COOKIE['PHPSESSID']) && $_COOKIE['PHPSESSID'] == 'inconnu') {
