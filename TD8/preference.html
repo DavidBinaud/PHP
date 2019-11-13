@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Preference</title>
+    </head>
+    <body>
+
+    	<header>
+    		<div class="nav">
+			  <a href="index.php?action=readAll&controller=voiture">Gestion Voitures</a>
+			  <a href="index.php?action=readAll&controller=utilisateur">Gestion Utilisateurs</a>
+			  <a href="index.php?action=readAll&controller=trajet">Gestion Trajets</a>
+			</div>
+    	</header>
+
+	   <form method="post" action="preference.php">
+            <fieldset>
+                <legend>Mon formulaire de Préférence:</legend>
+        
+                <div>
+                  <input type="radio" id="voiture" name="preference" value="voiture"
+                         checked>
+                  <label for="voiture">voiture</label>
+                </div>
+                
+                <div>
+                  <input type="radio" id="utilisateur" name="preference" value="utilisateur">
+                  <label for="utilisateur">utilisateur</label>
+                </div>
+                
+                <div>
+                  <input type="radio" id="trajet" name="preference" value="trajet">
+                  <label for="trajet">trajet</label>
+                </div>
+
+                </p>
+                    <input type="submit" value="Envoyer" />
+                </p>
+      </fieldset> 
+    </form>
+
+
+    </body>
+    <footer>
+    		<p style="border: 1px solid black;text-align:right;padding-right:1em;">
+  				Site de covoiturage de David Binaud
+			</p>
+    </footer>
+</html>
