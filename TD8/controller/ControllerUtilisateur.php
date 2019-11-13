@@ -5,9 +5,8 @@
 		protected static $object = 'utilisateur';
 
 		public static function readAll(){
-			$tab_u = ModelUtilisateur::selectAll();     //appel au modèle pour gerer la BD
-			//require ('../view/voiture/list.php');  //redirige vers la vue
-			//require (File::build_path(array("view","voiture","list.php")));
+			$tab_u = ModelUtilisateur::selectAll();
+
 			$view='list'; $pagetitle='Liste des utilisateurs';
 			require (File::build_path(array("view","view.php")));
 		}
@@ -18,20 +17,16 @@
 			
 				$u = ModelUtilisateur::select($_GET['login']); 
 				if($u == false){
-					//require ('../view/voiture/error.php');  //redirige vers la vue d'erreur
-					//require (File::build_path(array("view","voiture","error.php")));
 					$view='error'; $pagetitle='ErreurUserByID';
-					require (File::build_path(array("view","view.php")));
 				}else
 				{
 					$tab_t = ModelUtilisateur::findTrajets($_GET['login']);
 					$view='detail'; $pagetitle='Detail utilisateur';
-					require (File::build_path(array("view","view.php")));
 				}
 			}else{
-				$view='error'; $pagetitle='ErreurUserByID';
-				require (File::build_path(array("view","view.php")));
+				$view='error'; $pagetitle='ErreurUserByID'; $errorType = 'Read Utilisateur: Pas de login fourni';
 			}
+			require (File::build_path(array("view","view.php")));
 		}
 
 
@@ -56,7 +51,7 @@
 			if (isset($_GET['login'],$_GET['nom'],$_GET['prenom'],$_GET['pass'],$_GET['passconfirm'])){
 				if ($_GET['pass'] == $_GET['passconfirm']) {
 						
-					$u = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom']);
+					$u = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'],$_GET['pass']);
 					
 					if(ModelUtilisateur::save($u) == false){
 						$view='errorCreate'; $pagetitle='Erreur de Création';
@@ -67,7 +62,7 @@
 	
 					}
 				}else{
-					$view='error'; $pagetitle='Erreur de Création'; $errorType="Created utilisateur: mot de passe qui ne sont pas égaux";
+					$view='error'; $pagetitle='Erreur de Création'; $errorType="Created utilisateur: mots de passe sont différents";
 				}
 
 			}else{
@@ -92,11 +87,15 @@
 
 
 		public static function delete(){
-			ModelUtilisateur::delete($_GET['login']);
-			$tab_u = ModelUtilisateur::selectAll();
-			$login = $_GET['login'];
-
-			$view='delete'; $pagetitle='Suppresion utilisateur';
+			if (isset($_GET['login'])) {
+				$login = $_GET['login'];
+				ModelUtilisateur::delete($login);
+				$tab_u = ModelUtilisateur::selectAll();
+				$view='delete'; $pagetitle='Suppresion utilisateur';
+			}
+			else{
+				$view = 'error'; $pagetitle ='ErreurUserDelete'; $errorType = 'Delete Utilisateur: Pas de Login fourni';
+			}
 			require (File::build_path(array("view","view.php")));
 		}
 
@@ -111,7 +110,7 @@
 				$u = ModelUtilisateur::select($_GET['login']);
 
 				if($u == false){
-					self::error();
+					$view = 'error'; $pagetitle ='ErreurUserDelete'; $errorType = 'Update Utilisateur: Login fourni inexistant';
 				}
 				else{
 
@@ -119,14 +118,13 @@
     				$uNom = htmlspecialchars($u->get('nom'));
     				$uPrenom = htmlspecialchars($u->get('prenom'));
     				$uAction = "update";
-
 					$view='update'; $pagetitle='Mise A Jour';
-					require (File::build_path(array("view","view.php")));
 				}
 			}
 			else{
-				self::error();
+				$view = 'error'; $pagetitle ='ErreurUserUpdate'; $errorType = 'Update Utilisateur: Pas de Login fourni';
 			}
+			require (File::build_path(array("view","view.php")));
 		}
 
 
@@ -134,22 +132,27 @@
 
 
 		public static function updated(){
-			if(isset($_GET['login']) && isset($_GET['nom']) && isset($_GET['prenom'])){
-				$data = array(
-					"login" => $_GET['login'],
-					"nom" => $_GET['nom'],
-					"prenom" => $_GET['prenom']
-				);
+			if(isset($_GET['login'],$_GET['nom'],$_GET['prenom'],$_GET['pass'])){
+				if ($_GET['pass'] == $_GET['passconfirm']) {
+					$data = array(
+						"login" => $_GET['login'],
+						"nom" => $_GET['nom'],
+						"prenom" => $_GET['prenom'],
+						"mdp" => $_GET['pass']
+					);
 
-				ModelUtilisateur::update($data);
+					ModelUtilisateur::update($data);
 
-				$tab_u = ModelUtilisateur::selectAll();
-				$view='updated'; $pagetitle='Mise A Jour';
-				require (File::build_path(array("view","view.php")));
+					$tab_u = ModelUtilisateur::selectAll();
+					$view='updated'; $pagetitle='Mise A Jour';
+				}else{
+					$view = 'error'; $pagetitle ='ErreurUserUpdated'; $errorType = 'Updated Utilisateur: mots de passe sont différents';
+				}
 			}
 			else{
-				self::error();
+				$view = 'error'; $pagetitle ='ErreurUserUpdated'; $errorType = 'Updated Utilisateur: Probleme de paramètres';
 			}
+			require (File::build_path(array("view","view.php")));
 		}
 
 
@@ -172,13 +175,12 @@
 				$u = ModelUtilisateur::select($_GET['login']);
 
 				$view='trajetUser'; $pagetitle='Trajet de l\'utilisateur';
-				require (File::build_path(array("view","view.php")));
 
 			}else{
 				$errorType = "Trouver Les Trajets d'un utilisateur: Pas de login Fourni";
 				$view='error'; $pagetitle='Erreur Lecture';
-				require (File::build_path(array("view","view.php")));
 			}
+			require (File::build_path(array("view","view.php")));
 
 		}
 
@@ -187,20 +189,19 @@
 
 
 		public static function deleteTrajetFromUser(){
-			if (isset($_GET['login']) && isset($_GET['idTrajet'])) {
+			if (isset($_GET['login'],$_GET['idTrajet'])) {
 				ModelUtilisateur::deleteTrajet($_GET['idTrajet'],$_GET['login']);
 				$tab_t = ModelUtilisateur::findTrajets($_GET['login']);
 				$u = ModelUtilisateur::select($_GET['login']);
 
 				$view='deleteTrajetFromUser'; $pagetitle='Deletion ; Passagers du Trajet';
-				require (File::build_path(array("view","view.php")));
+				
 			}
 			else{
 				$errorType = "Supprimer la participation d'un utilisateur à un Trajet en tant que passager: problème de paramètres";
 				$view='error'; $pagetitle='Erreur deleteTrajetFromUser';
-				require (File::build_path(array("view","view.php")));
 			}
-			
+			require (File::build_path(array("view","view.php")));
 		}
 
 

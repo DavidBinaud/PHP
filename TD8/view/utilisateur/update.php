@@ -17,17 +17,17 @@
 	    
 	    <p>
 	      <label for="login_id">Login</label> :
-	      <input type="text" value='<?php echo $uLogin;?>' name="login" id="login_id" <?php echo $loginParam;?>/>
+	      <input type="text" value=<?php echo $uLogin;?> name="login" id="login_id" <?php echo $loginParam;?>/>
 	    </p>
 
 	    <p>
 	      <label for="nom_id">Nom</label> :
-	      <input type="text" value='<?php echo $uNom;?>' name="nom" id="nom_id" required/>
+	      <input type="text" value=<?php echo $uNom;?> name="nom" id="nom_id" required/>
 	    </p>
 
 	    <p>
 	      <label for="prenom_id">Prenom</label> :
-	      <input type="text" value='<?php echo $uPrenom;?>' name="prenom" id="prenom_id" required/>
+	      <input type="text" value=<?php echo $uPrenom;?> name="prenom" id="prenom_id" required/>
 	    </p>
 
 	    <p>
@@ -43,8 +43,8 @@
 
 
 	    <p>
-	      <input type='hidden' name='action' value={$actionAfter}>
-	      <input type='hidden' name='controller' value={$controller}>
+	      <input type='hidden' name='action' value=<?php echo $actionAfter?>>
+	      <input type='hidden' name='controller' value=<?php echo $controller?>>
 	      <input type="submit" value="Envoyer" />
 	    </p>
 	  </fieldset> 
