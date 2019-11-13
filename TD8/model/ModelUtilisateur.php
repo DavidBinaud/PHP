@@ -74,6 +74,32 @@
     }
 
 
+    public static function checkPassword($login,$mot_de_passe_chiffre){
+      $sql ="SELECT COUNT(*) FROM utilisateur WHERE login=:login AND mdp=:motdepasse";
+
+
+      $req_prep = Model::$pdo->prepare($sql);
+
+      $values = array(
+        'login' => $login,
+        'motdepasse' => $mot_de_passe_chiffre
+      );
+
+
+      $req_prep->execute($values);
+
+      $req_prep->setFetchMode(PDO::FETCH_ASSOC);
+
+      $resultat = $req_prep->fetchAll();
+      
+      if($resultat[0]['COUNT(*)'] == '1'){
+        return true;
+      }
+      return false;
+    
+    }
+
+
 
   }
 ?>

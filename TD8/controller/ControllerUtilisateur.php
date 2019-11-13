@@ -206,5 +206,30 @@
 		}
 
 
+
+		public static function connect(){
+			$view='connect'; $pagetitle='Connexion';
+			require (File::build_path(array("view","view.php")));
+		}
+
+
+		public static function connected(){
+			if(isset($_GET['login'],$_GET['pass'])){
+				if(ModelUtilisateur::checkPassword($_GET['login'],Security::chiffrer($_GET['pass']))){
+					$u = ModelUtilisateur::select($_GET['login']);
+					$tab_t = ModelUtilisateur::findTrajets($_GET['login']);
+					$_SESSION['login'] = $_GET['login'];
+
+					$view='detail'; $pagetitle='Connexion';
+				}else{
+					$view='error'; $pagetitle='Erreur deleteTrajetFromUser'; $errorType = 'Aucun Login et Mot de passe existant';
+				}
+			}
+			require (File::build_path(array("view","view.php")));
+		}
+
+
+
+
 	}
 ?>
