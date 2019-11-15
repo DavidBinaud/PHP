@@ -3,7 +3,6 @@
 	// pour faire en sorte que nos cookies sessions ne s'appliquent que sur notre site perso
 	session_set_cookie_params(30*60);
 	session_start();
-	if (isset($_COOKIE,$_COOKIE['PHPSESSID']) && $_COOKIE['PHPSESSID'] == 'inconnu') {
 		
 		if (isset($_SESSION['LAST_ACTIVITY']) && time() - $_SESSION['LAST_ACTIVITY'] > (10*60)) {
 	     	// if last request was more than 30 minutes ago
@@ -34,8 +33,5 @@
 		$ROOT_FOLDER = __DIR__;
 		require_once "{$ROOT_FOLDER}{$DS}lib{$DS}File.php";
 		require_once (File::build_path(array("controller","routeur.php")));
-	}
-	else{
-		echo 'Acces Restreint';
-	}
+	
 ?>
