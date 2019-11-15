@@ -150,7 +150,13 @@
 							"prenom" => $_GET['prenom'],
 							"mdp" => Security::chiffrer($_GET['pass'])
 						);
-					
+						if (isset($_GET['is_admin'])) {
+							$data['admin'] = true;
+						}else{
+							$data['admin'] = false;
+						}
+						var_dump($data);
+
 						ModelUtilisateur::update($data);
 
 						$tab_u = ModelUtilisateur::selectAll();

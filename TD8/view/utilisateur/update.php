@@ -9,11 +9,13 @@
 		$loginParam = "readonly";
 		$actionAfter = "updated";
 		$titreForm = "Mise à Jour de " . ucfirst(static::$object);
+		if ($u->get('admin')) {
+			$admin_checkbox = "checked";
+		}
+		var_dump($u->get('admin'));
 	}
 
-	if(Session::is_admin()){
-		$admin_checkbox = "checked";
-	}else{
+	if(!Session::is_admin()){
 		$admin_checkbox = "hidden";
 		$label_checkbox = "hidden";
 	}
@@ -50,7 +52,7 @@
 
 	    <p>
 	      <label for="admin_id" <?php echo $label_checkbox?>>Administrateur?:</label>
-	      <input type="checkbox" value="is_admin"name="admin" id="admin_id" <?php echo $admin_checkbox;?>/>
+	      <input type="checkbox" name="is_admin" id="admin_id" <?php echo $admin_checkbox;?>/>
 	    </p>
 
 
