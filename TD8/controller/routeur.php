@@ -1,4 +1,17 @@
 <?php
+
+
+	function myGet($nomvar){
+		if (isset($_GET[$nomvar])) {
+			return $_GET[$nomvar];
+		}elseif (isset($_POST[$nomvar])) {
+			return $_POST[$nomvar];
+		}else{
+			return NULL;
+		}
+	}
+
+
 	//require_once './ControllerVoiture.php';
 	require_once (File::build_path(array("controller","ControllerVoiture.php")));
 	require_once (File::build_path(array("controller","ControllerUtilisateur.php")));
@@ -14,9 +27,9 @@
 	}
 
 	//Verifie qu'une action est passée dans l'url ; Si aucune action on fait l'action de base readALL
-	if(isset($_GET['action']) && isset($_GET['controller'])){
-		$action = $_GET['action'];
-		$controller = $_GET['controller'];
+	if(!is_null(myGet('action')) && !is_null(myGet('controller'))){
+		$action = myGet('action');
+		$controller = myGet('controller');
 		$controller_class = 'Controller' . ucfirst($controller);
 
 

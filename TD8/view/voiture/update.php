@@ -10,9 +10,13 @@
 		$actionAfter = "updated";
 		$titreForm = "Mise à Jour de " . ucfirst(static::$object);
 	}
-
+	if (Conf::getDebug()) {
+		$method = "get";
+	}else{
+		$method = "post";
+	}
 ?>
-	<form method="get" action="index.php">
+	<form method=<?php echo $method;?> action="index.php">
 	  <fieldset>
 
 	    <legend>Mon formulaire de <?php echo $titreForm;?>:</legend>

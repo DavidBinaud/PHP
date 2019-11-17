@@ -49,17 +49,18 @@
 
 
 		public static function created(){
-			$v = new ModelVoiture($_GET['marque'],$_GET['couleur'],$_GET['immatriculation']);
-			var_dump(get_object_vars($v));
-			if(ModelVoiture::save($v) == false){
-				$view='errorCreate'; $pagetitle='Erreur de Création';
-				require (File::build_path(array("view","view.php")));
+			if (!is_null(myGet('marque')) && !is_null(myGet('immatriculation')) && !is_null(myGet('immatriculation'))) {
+				$v = new ModelVoiture(myGet('marque'),myGet('immatriculation'),myGet('immatriculation'));
+				if(ModelVoiture::save($v) == false){
+					$view='error'; $pagetitle='Erreur de Création'; $errorType = "Voiture Created: immatriculation déjà existante";
+				}else{
+					$tab_v = ModelVoiture::selectAll();
+					$view='created'; $pagetitle='Création Reussie';
+				}
 			}else{
-				$tab_v = ModelVoiture::selectAll();
-				$view='created'; $pagetitle='Création Reussie';
-				require (File::build_path(array("view","view.php")));
+				$view='error'; $pagetitle='Erreur de Création'; $errorType = "Voiture Created: Probleme de paramètres";
 			}
-			
+			require (File::build_path(array("view","view.php")));
 		}
 
 

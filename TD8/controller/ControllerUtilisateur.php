@@ -15,7 +15,7 @@
 
 
 		public static function read(){
-			if (isset($_GET['login'])) {
+			if (!is_null(myGet('login'))) {
 			
 				$u = ModelUtilisateur::select($_GET['login']); 
 				if($u == false){
