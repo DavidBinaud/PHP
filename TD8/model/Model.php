@@ -152,13 +152,13 @@
 	
 	      	
 	      	
-	      	try{
+	      	//try{
 	      	  $req_prep->execute($values);
-	      	} catch(PDOException $e) {
+	      	/*} catch(PDOException $e) {
 	      	    if($e->getCode() == 23000){
 	      	    	return false;
 	      	    }
-		    }
+		    }*/
       		return true;
     }
 

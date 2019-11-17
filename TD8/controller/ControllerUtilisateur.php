@@ -54,15 +54,19 @@
 				if ($_GET['pass'] == $_GET['passconfirm']) {
 
 					if (filter_var ($_GET['email'],FILTER_VALIDATE_EMAIL)) {
-						$u = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'],Security::chiffrer($_GET['pass']));
+						$nonce = Security::generateRandomHex();
+						$u = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'],Security::chiffrer($_GET['pass']),0,$nonce);
 						
 						if(ModelUtilisateur::save($u) == false){
 							$view='errorCreate'; $pagetitle='Erreur de Création';
 		
 						}else{
+							$login = rawurlencode($_GET['login']);
+							$mail = "<a href=localhost/PHP/TD8/index.php?controller=utilisateur&action=validate&login=$login&nonce=$nonce>cliquer sur le lien pour valider l'adresse email</a>";
+							var_dump($mail);
+							mail($_GET['email'],"Le sujet",$mail);
 							$tab_u = ModelUtilisateur::selectAll();
 							$view='created'; $pagetitle='Création Reussie';
-		
 						}
 					}else{
 						$view='error'; $pagetitle='Erreur de Création'; $errorType="Created utilisateur: email non valide";
@@ -239,13 +243,17 @@
 			if(isset($_GET['login'],$_GET['pass'])){
 				if(ModelUtilisateur::checkPassword($_GET['login'],Security::chiffrer($_GET['pass']))){
 					$u = ModelUtilisateur::select($_GET['login']);
-					$_SESSION['admin'] = $u->get('admin');
-					$tab_t = ModelUtilisateur::findTrajets($_GET['login']);
-					$_SESSION['login'] = $_GET['login'];
+					if ($u->get('nonce') == NULL) {
+						$_SESSION['admin'] = $u->get('admin');
+						$tab_t = ModelUtilisateur::findTrajets($_GET['login']);
+						$_SESSION['login'] = $_GET['login'];
 
-					$view='detail'; $pagetitle='Connexion';
+						$view='detail'; $pagetitle='Connexion';
+					}else{
+						$view='error'; $pagetitle='Erreur Connexion'; $errorType = 'Erreur connected: adresse email non validée';
+					}
 				}else{
-					$view='error'; $pagetitle='Erreur deleteTrajetFromUser'; $errorType = 'Login et Mot de passe incorrect';
+					$view='error'; $pagetitle='Erreur Connexion'; $errorType = 'Erreur connected: Login et Mot de passe incorrect';
 				}
 			}
 			require (File::build_path(array("view","view.php")));
@@ -259,6 +267,30 @@
 			$pagetitle='Deconnection';
 			header('Location: index.php');
 			exit(); 
+		}
+
+
+		public static function validate(){
+			if (isset($_GET['login'],$_GET['nonce'])) {
+				$u = ModelUtilisateur::select($_GET['login']);
+				if ($u != false) {
+					if ($u->get('nonce') == $_GET['nonce']) {
+						$data = $u->get_object_vars();
+						var_dump($data);
+						$data['nonce'] = NULL;
+						var_dump($data);
+						ModelUtilisateur::update($data);
+						$view='validate'; $pagetitle='Validation Email';
+					}else{
+						$view='error'; $pagetitle='Erreur Connexion'; $errorType = 'Erreur validate: nonce non valide';
+					}
+				}else{
+					$view='error'; $pagetitle='Erreur Connexion'; $errorType = 'Erreur validate: Login inexistant';
+				}
+			}else{
+				$view='error'; $pagetitle='Erreur Connexion'; $errorType = 'Erreur validate: Probleme de paramètres';
+			}
+			require (File::build_path(array("view","view.php")));
 		}
 
 

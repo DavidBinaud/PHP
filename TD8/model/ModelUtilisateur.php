@@ -8,6 +8,7 @@
     private $prenom;
     private $mdp;
     private $admin;
+    private $nonce;
     protected static $object = "utilisateur";
     protected static $primary='login';
 
@@ -22,13 +23,14 @@
       $this->$nom_attribut = $value;
     }
 
-    public function __construct($l = NULL, $n = NULL, $p = NULL,$password = NULL,$admin = 0)  {
+    public function __construct($l = NULL, $n = NULL, $p = NULL,$password = NULL,$admin = 0,$nonce = 0)  {
       if (!is_null($l) && !is_null($n) && !is_null($p)) {
         $this->login = $l;
         $this->nom = $n;
         $this->prenom = $p;
         $this->mdp = $password;
         $this->admin = $admin;
+        $this->nonce = $nonce;
       }
     }
 
