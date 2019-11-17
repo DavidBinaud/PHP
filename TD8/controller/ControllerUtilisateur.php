@@ -50,18 +50,22 @@
 
 
 		public static function created(){
-			if (isset($_GET['login'],$_GET['nom'],$_GET['prenom'],$_GET['pass'],$_GET['passconfirm'])){
+			if (isset($_GET['login'],$_GET['nom'],$_GET['prenom'],$_GET['pass'],$_GET['passconfirm'],$_GET['email'])){
 				if ($_GET['pass'] == $_GET['passconfirm']) {
+
+					if (filter_var ($_GET['email'],FILTER_VALIDATE_EMAIL)) {
+						$u = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'],Security::chiffrer($_GET['pass']));
 						
-					$u = new ModelUtilisateur($_GET['login'],$_GET['nom'],$_GET['prenom'],Security::chiffrer($_GET['pass']));
-					
-					if(ModelUtilisateur::save($u) == false){
-						$view='errorCreate'; $pagetitle='Erreur de Création';
-	
+						if(ModelUtilisateur::save($u) == false){
+							$view='errorCreate'; $pagetitle='Erreur de Création';
+		
+						}else{
+							$tab_u = ModelUtilisateur::selectAll();
+							$view='created'; $pagetitle='Création Reussie';
+		
+						}
 					}else{
-						$tab_u = ModelUtilisateur::selectAll();
-						$view='created'; $pagetitle='Création Reussie';
-	
+						$view='error'; $pagetitle='Erreur de Création'; $errorType="Created utilisateur: email non valide";
 					}
 				}else{
 					$view='error'; $pagetitle='Erreur de Création'; $errorType="Created utilisateur: mots de passe sont différents";

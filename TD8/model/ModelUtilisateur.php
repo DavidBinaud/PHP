@@ -22,7 +22,7 @@
       $this->$nom_attribut = $value;
     }
 
-    public function __construct($l = NULL, $n = NULL, $p = NULL,$password = NULL,$admin =NULL)  {
+    public function __construct($l = NULL, $n = NULL, $p = NULL,$password = NULL,$admin = 0)  {
       if (!is_null($l) && !is_null($n) && !is_null($p)) {
         $this->login = $l;
         $this->nom = $n;

@@ -49,6 +49,11 @@
 	      <input type="password" name="passconfirm" id="confimpass_id" required/>
 	    </p>
 
+	    <p>
+	      <label for="confimpass_id">Email</label>
+	      <input type="email" name="email" id="email_id" required/>
+	    </p>
+
 
 	    <p>
 	      <label for="admin_id" <?php echo $label_checkbox?>>Administrateur?:</label>
